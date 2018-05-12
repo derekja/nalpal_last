@@ -20,12 +20,21 @@ export class Auth extends React.Component<Props, State> {
   }
 
   submitRegisterForm = () => {
-    postRegisterUser(this.state.username, this.state.email, this.state.mobile, this.state.password)
+    postRegisterUser(this.state.username, this.state.email, this.state.mobile, this.state.password).then(
+        (response) => {
+        this.props.setLoggedIn(response.id)
+        }
+      )
   }
 
   submitLoginForm = () => {
-    postLogin(this.state.username, this.state.password)
-    //this.props.setLoggedIn()
+    postLogin(this.state.username, this.state.password).then(
+        (response) => {
+          if (response.status == "Login Successful") {
+              this.props.setLoggedIn(response.id)
+          }
+        }
+      )
   }
 
   loginPage = () => {
@@ -35,6 +44,7 @@ export class Auth extends React.Component<Props, State> {
   registerPage = () => {
     this.setState({register: true});
   }
+
 
   render() {
       return (

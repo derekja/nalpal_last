@@ -108,15 +108,23 @@ export class Emergency extends React.Component<Props, State> {
               );
     } else {
       return (
-      <View>
-                      <EmergencyRequestConfirmation 
-                requester={this.props.requester}
-                clearRequestData={this.clearRequestData}
-                sendEmergencyRequest={this.sendEmergencyRequest}
-                requestLocation={requestLocation}
-                isVisible={this.props.requester.confirmationPending}/>
-
+        <View>
+        <WideButton
+          title="Call 911"
+          buttonStyleType = "secondary"
+        />
+        <WideButton
+          title="Send a customized message to friends"
+          buttonStyleType = "secondary"
+          onPress={this.openContactConfirmationScreen}
+        />
+        <WideButton
+          title="Emergency! Get me a Kit!"
+          buttonStyleType = "main"
+          onPress={this.openGlobalConfirmationScreen}
+        />
       </View>
+
     );
     }
   }
