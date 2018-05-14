@@ -1,6 +1,7 @@
 //@flow
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import {colours} from "./colours"
 
 type Props = {
   onPress?: Function,
@@ -41,10 +42,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   buttonMain: {
-    backgroundColor: "#B71C1C",
+    backgroundColor: colours.emergency,
   },
   buttonSecondary: {
-    backgroundColor: "#006064",
+    backgroundColor: colours.primary,
     width: '100%',
   },
   text: {

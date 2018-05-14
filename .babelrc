@@ -1,12 +1,3 @@
 {
   "presets": ["react-native"],
-  "env": {
-    "development": {
-      "plugins": [
-        "transform-react-jsx-source",
-        "transform-object-rest-spread",
-        "react-native-web"
-      ]
-    }
-  }
 }

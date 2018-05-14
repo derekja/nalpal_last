@@ -11,9 +11,7 @@ export class NavWrapper extends React.Component<Props, State> {
     return (
       <View style={{flex: 1}}>
         <Header {...this.props}/>
-        <ScrollView style={styles.contentContainer}>
           {this.props.children}
-        </ScrollView>
         {this.props.displayNav && <Nav {...this.props}/>}
       </View>
     );

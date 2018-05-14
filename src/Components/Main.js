@@ -32,7 +32,7 @@ export class Main extends React.Component<Props, State> {
   state: State = {
     emergencyInProgress: false,
     selectedNavToggle: "Emergency",
-    displayNav: false,
+    displayNav: true,
     userLocation: {
       latitude: 48.427325,
       longitude: -123.356122
@@ -63,6 +63,31 @@ export class Main extends React.Component<Props, State> {
 
   render() {
 
+    let page = {};
+    switch(this.state.selectedNavToggle) {
+      case "Emergency":
+        page = <Emergency 
+                  setEmergencyInProgress={this.setEmergencyInProgress}
+                  setResponderState={this.setResponderState}
+                  setRequesterState={this.setRequesterState}
+                  requester={this.state.requester}
+                  responder={this.state.responder}
+                  userLocation={this.state.userLocation}
+                />
+        break;
+      case "Chat":
+        page = <Chat/>
+        break;
+      case "Information":
+        page = <Information/>
+        break;
+      case "Settings":
+        page = <Settings/>
+        break;
+      default:
+        break;
+    }
+
     return (
       <NavWrapper
           updateSelectedNavToggle={this.updateSelectedNavToggle} 
@@ -71,31 +96,14 @@ export class Main extends React.Component<Props, State> {
           displayNav={this.state.displayNav}
 
       >
-          <MainRouting  setEmergencyInProgress={this.setEmergencyInProgress}
-                        setResponderState={this.setResponderState}
-                        setRequesterState={this.setRequesterState}
-                        requester={this.state.requester}
-                        responder={this.state.responder}
-                        userLocation={this.state.userLocation}
-          />
+        <View style={styles.contentContainer}>
+          {page}
+        </View>
       </NavWrapper>
     );
   }
 
 }
-
-const MainRouting = (emergencyProps) => (
-  <View style={styles.contentContainer}>
-    <Route path="/chat" component={Chat}/>
-    <Route path="/information" component={Information} />
-    <Route path="/settings" component={Settings} />
-    <Route exact path="/responder/contact" render={(props) => (<Emergency {...props} {...emergencyProps}
-     triggerResponderRequest={true} contact={true}/>)}/>
-    <Route exact path="/responder" render={(props) => (<Emergency {...props} {...emergencyProps}
-     triggerResponderRequest={true}/>)}/>
-    <Route exact path="/" render={(props) => (<Emergency {...props} {...emergencyProps} />)}/>
-  </View>
-);
 
 const styles = StyleSheet.create({
   contentContainer: {

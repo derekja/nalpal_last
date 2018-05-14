@@ -6,7 +6,7 @@ import {Auth} from './Components/Auth/Auth'
 export default class App extends Component {
 
   state = {
-    loggedIn: false,
+    loggedIn: true,
     id: null
   };
 
@@ -21,7 +21,7 @@ export default class App extends Component {
               {this.state.loggedIn && <Route exact path="/*" component={Main} />}
               {!this.state.loggedIn && <Route exact path="/*"  render={(props) => (<Auth setLoggedIn={this.setLoggedIn}/>)} />}
           </Switch>
-        </Router>
+    </Router>
     )
   }
 }

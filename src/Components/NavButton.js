@@ -22,22 +22,6 @@ class NavButton extends React.Component<Props, State> {
 
   onPress = () => {
     this.props.updateSelectedNavToggle(this.props.type);
-    switch(this.props.type) {
-      case "Emergency":
-        this.props.history.push("/");
-        break;
-      case "Chat":
-        this.props.history.push("/chat");
-        break;
-      case "Information":
-        this.props.history.push("/information");
-        break;
-      case "Settings":
-        this.props.history.push("/settings");
-        break;
-      default:
-        break;
-    }
   }
 
   render() { 
@@ -111,4 +95,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withRouter(NavButton);
+export default NavButton;

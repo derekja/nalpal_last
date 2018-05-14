@@ -1,6 +1,7 @@
 import React from 'react'
-import { View} from 'react-native'
+import { View, ScrollView, StyleSheet} from 'react-native'
 import {Contact} from "./ContactMessageCards"
+import {AddButton} from "../UI/AddButton"
 
 export class ContactsContainer extends React.Component<Props, State> {
   
@@ -10,9 +11,18 @@ export class ContactsContainer extends React.Component<Props, State> {
     <Contact contactName={contact.contactName} nickname={contact.nickname} key={i} id={i}/>
     );
     return (
-      <View >
+      <View style={styles.flex}>
+      <ScrollView>
         {contacts}
+      </ScrollView>
+      <AddButton/>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  flex: {
+    flex: 1
+  },
+});

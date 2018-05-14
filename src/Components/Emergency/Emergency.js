@@ -109,7 +109,7 @@ export class Emergency extends React.Component<Props, State> {
     } else {
       return (
         <View>
-        <WideButton
+                <WideButton
           title="Call 911"
           buttonStyleType = "secondary"
         />

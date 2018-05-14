@@ -6,6 +6,7 @@ import {Contact, Message} from "./ContactMessageCards"
 import {TabComponent} from "../UI/TabComponent"
 import {ContactsContainer} from "./ContactsContainer"
 import {MessagesContainer} from "./MessagesContainer"
+import {ComposeMessage} from "./ComposeMessage"
 
 
 export class Chat extends React.Component<Props, State> {
@@ -14,6 +15,7 @@ export class Chat extends React.Component<Props, State> {
     super(props);
     this.state = {
       selectedTabIndex: 0,
+      actionScreenOpen: null
     };
   }
 
@@ -23,6 +25,15 @@ export class Chat extends React.Component<Props, State> {
     });
   };
 
+  openComposeMessage = () => {
+    this.setState({actionScreenOpen: "composeMessage"})
+  }
+
+  closeActionScreen = () => {
+    this.setState({actionScreenOpen: null})
+  }
+
+
 
   render() { 
     const contacts = [{contactName:"Raybird6601", nickname: "Ray"}, {contactName:"MissMaryMac", nickname: "Mary"}, 
@@ -31,13 +42,26 @@ export class Chat extends React.Component<Props, State> {
      const messages=[{contacts: ["MissMaryMac", "ArclightVYNE", "Raybird6601"]}, {contacts: ["MissMaryMac", "Creancer930"]},
       {contacts: ["ArclightVYNE", "Jeff627", "DamletHanish", "Creancer930", "MissMaryMac", "User0001"]}, {contacts: ["Jeff627", "DamletHanish", "Creancer930", "User0001"]}];
     const tabs = ["Contacts", "Messages"];
-    return (
-        <View>
-            <TabComponent handleTabChange= {this.handleTabChange} selectedTabIndex={this.state.selectedTabIndex} tabs={tabs}/>
+
+    if (this.state.actionScreenOpen) {
+      return (
+        <View style={styles.chatContainer}>
+          {this.state.actionScreenOpen == "composeMessage" && <ComposeMessage contacts={contacts}/>}
+        </View>
+        );
+    } else {
+      return (
+        <View style={styles.chatContainer}>
+          <TabComponent handleTabChange= {this.handleTabChange} selectedTabIndex={this.state.selectedTabIndex} tabs={tabs}/>
+          <View style={styles.chatContainer}>
             {this.state.selectedTabIndex == 0 && <ContactsContainer contacts={contacts} />}
-            {this.state.selectedTabIndex == 1 && <MessagesContainer messages={messages} />}
+            {this.state.selectedTabIndex == 1 && <MessagesContainer 
+                                                          openComposeMessage={this.openComposeMessage}
+                                                          messages={messages} />}
+          </View>
         </View>
     );
+    }
   }
 
 }
@@ -53,7 +77,11 @@ export class Chat extends React.Component<Props, State> {
 //   </View>
 // );
 
-const styles = StyleSheet.create({input: {
+const styles = StyleSheet.create({
+  chatContainer: {
+      flex: 1
+  },
+  input: {
     borderColor: 'grey', 
     borderWidth: 1, 
     marginVertical: 5,
@@ -94,3 +122,6 @@ const styles = StyleSheet.create({input: {
   }
   
 });
+
+//{this.state.selectedTabIndex == 0 && <ContactsContainer contacts={contacts} />}
+//{this.state.selectedTabIndex == 1 && <MessagesContainer messages={messages} />}

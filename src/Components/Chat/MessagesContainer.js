@@ -1,6 +1,7 @@
 import React from 'react'
-import {View} from 'react-native'
+import {View, ScrollView, StyleSheet} from 'react-native'
 import {Message} from "./ContactMessageCards"
+import {AddButton} from "../UI/AddButton"
 
 export class MessagesContainer extends React.Component<Props, State> {
   
@@ -28,9 +29,18 @@ export class MessagesContainer extends React.Component<Props, State> {
       }
     );
     return (
-      <View >
-        {messages}
+      <View style={styles.flex}>
+        <ScrollView>
+          {messages}
+        </ScrollView>
+        <AddButton onPress={this.props.openComposeMessage}/>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  flex: {
+    flex: 1
+  },
+});
