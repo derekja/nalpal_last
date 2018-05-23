@@ -2,6 +2,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import NavButton from './NavButton'
+import {colours} from "../UI/colours"
 
 export type NavButtonType = "Emergency" | "Chat" | "Information" | "Settings";
 
@@ -37,6 +38,7 @@ export class Nav extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   navContainer: {
     height: 60,
+    backgroundColor: colours.primary
   },
   navStyles: {
     alignItems: 'stretch',

@@ -1,8 +1,5 @@
 import React from 'react'
-import { View, TextInput, StyleSheet, Text } from 'react-native'
-import {CancelButton} from '../CancelButton'
-import {MessageIcon} from '../Icons/MessageIcon'
-import {Contact, Message} from "./ContactMessageCards"
+import { View, StyleSheet } from 'react-native'
 import {TabComponent} from "../UI/TabComponent"
 import {ContactsContainer} from "./ContactsContainer"
 import {MessagesContainer} from "./MessagesContainer"
@@ -46,7 +43,7 @@ export class Chat extends React.Component<Props, State> {
     if (this.state.actionScreenOpen) {
       return (
         <View style={styles.chatContainer}>
-          {this.state.actionScreenOpen == "composeMessage" && <ComposeMessage contacts={contacts}/>}
+          {this.state.actionScreenOpen === "composeMessage" && <ComposeMessage contacts={contacts}/>}
         </View>
         );
     } else {
@@ -54,8 +51,8 @@ export class Chat extends React.Component<Props, State> {
         <View style={styles.chatContainer}>
           <TabComponent handleTabChange= {this.handleTabChange} selectedTabIndex={this.state.selectedTabIndex} tabs={tabs}/>
           <View style={styles.chatContainer}>
-            {this.state.selectedTabIndex == 0 && <ContactsContainer contacts={contacts} />}
-            {this.state.selectedTabIndex == 1 && <MessagesContainer 
+            {this.state.selectedTabIndex === 0 && <ContactsContainer contacts={contacts} />}
+            {this.state.selectedTabIndex === 1 && <MessagesContainer 
                                                           openComposeMessage={this.openComposeMessage}
                                                           messages={messages} />}
           </View>

@@ -4,9 +4,8 @@ import {Emergency} from './Emergency/Emergency'
 import {Chat} from './Chat/Chat'
 import {Settings} from './Settings'
 import {Information} from './Information'
-import {NavButtonType} from './Nav'
-import { Route } from '../Routing'
-import {NavWrapper} from './NavWrapper'
+import {NavButtonType} from './Navigation/Nav'
+import {NavWrapper} from './Navigation/NavWrapper'
 
 type State = {
   UI: {

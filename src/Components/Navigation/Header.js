@@ -1,7 +1,7 @@
-//@flow
+
 import React from 'react'
 import { View, Text, StyleSheet} from 'react-native'
-import {colours} from "./colours"
+import {colours} from "../UI/colours"
 
 
 export class Header extends React.Component<Props, State> {

@@ -6,7 +6,7 @@ import {Auth} from './Components/Auth/Auth'
 export default class App extends Component {
 
   state = {
-    loggedIn: false,
+    loggedIn: true,
     id: null
   };
 

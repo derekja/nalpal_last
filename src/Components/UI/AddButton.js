@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet, TouchableHighlight} from "react-native"
+import {View, StyleSheet, TouchableHighlight} from "react-native"
 import {AddIcon} from "../Icons/AddIcon"
-import {colours} from '../colours'
+import {colours} from './colours'
 
 
 export class AddButton extends React.Component<Props, State> {
@@ -15,7 +15,9 @@ export class AddButton extends React.Component<Props, State> {
         style={styles.containerStyle}
         onPress={this.props.onPress}
       >
+      <View>
         <AddIcon/>
+      </View>
       </TouchableHighlight>
     );
   }

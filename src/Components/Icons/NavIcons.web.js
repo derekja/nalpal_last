@@ -4,7 +4,7 @@ import Settings from 'material-ui/svg-icons/action/settings'
 import InfoOutline from 'material-ui/svg-icons/action/info-outline'
 import Warning from 'material-ui/svg-icons/alert/warning'
 import ChatBubbleOutline from 'material-ui/svg-icons/communication/chat-bubble-outline'
-import {colours} from "../colours"
+import {colours} from "../UI/colours"
 
 type Props = {
   active: boolean

@@ -2,7 +2,7 @@ import React  from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import MapContainer from '../UI/MapContainer'
 import {EmergencyMessageBox} from './EmergencyMessageBox'
-import {CancelButton} from '../CancelButton'
+import {CancelButton} from '../UI/CancelButton'
 
 type Props = {
     requestLocation: {

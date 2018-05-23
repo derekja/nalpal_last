@@ -1,13 +1,11 @@
 import React from 'react'
 import { View } from 'react-native'
-import {WideButton} from '../WideButton'
+import {WideButton} from '../UI/WideButton'
 import {EmergencyRequest} from './EmergencyRequest'
 import {EmergencyResponse} from './EmergencyResponse'
 import {EmergencyResponseConfirmation} from './EmergencyResponseConfirmation'
 import {EmergencyRequestConfirmation} from './EmergencyRequestConfirmation'
 
-type Props = {
-}
 
 export class Emergency extends React.Component<Props, State> {
 

@@ -1,16 +1,6 @@
-//@flow
+
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-
-type Props = {
-  onPress?: Function,
-  title: string,
-  buttonStyleType: "main" | "secondary"
-}
-
-type State = {
-
-}
 
 export class CancelButton extends React.Component<Props, State> {
 

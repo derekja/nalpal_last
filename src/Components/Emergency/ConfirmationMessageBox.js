@@ -1,9 +1,6 @@
 import React  from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import MapContainer from '../UI/MapContainer'
-import {EmergencyMessageBox} from './EmergencyMessageBox'
-import {CancelButton} from '../CancelButton'
-import {colours} from "../colours"
+import {colours} from "../UI/colours"
 
 export class ConfirmationMessageBox extends React.Component<Props, State> {
 

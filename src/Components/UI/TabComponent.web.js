@@ -1,6 +1,6 @@
 import React from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs';
-import {colours} from "../colours"
+import {colours} from "./colours"
 
 
 export class TabComponent extends React.Component<Props, State> {

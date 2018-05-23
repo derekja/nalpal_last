@@ -1,6 +1,6 @@
 import React  from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import {colours} from "../colours"
+import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import {colours} from "../UI/colours"
 
 export class EmergencyRequestButton extends React.Component<Props, State> {
 

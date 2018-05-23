@@ -2,8 +2,8 @@ import React from 'react'
 import { View, StyleSheet, Text, ImageBackground,TouchableHighlight} from 'react-native'
 import {TextFieldComponent} from '../UI/TextFieldComponent'
 import {postRegisterUser, postLogin} from "../../Requests/auth"
-import {WideButton} from "../WideButton"
-import {colours} from "../colours"
+import {WideButton} from "../UI/WideButton"
+import {colours} from "../UI/colours"
 
 export class Auth extends React.Component<Props, State> {
 
@@ -30,7 +30,7 @@ export class Auth extends React.Component<Props, State> {
   submitLoginForm = () => {
     postLogin(this.state.username, this.state.password).then(
         (response) => {
-          if (response.status == "Login Successful") {
+          if (response.status === "Login Successful") {
               this.props.setLoggedIn(response.id)
           }
         }

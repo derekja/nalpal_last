@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, TextInput} from 'react-native'
-import {colours} from "../colours"
+import {colours} from "./colours"
 
 
 export class TextFieldComponent extends React.Component<Props, State> {

@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, View} from 'react-native'
-import {colours} from "../colours"
+import {colours} from "./colours"
 import { CheckBox } from 'react-native-elements'
+import {StyleSheet, View} from "react-native"
 
 
 export class CheckboxComponent extends React.Component<Props, State> {

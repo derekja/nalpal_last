@@ -1,8 +1,6 @@
 import React from 'react'
 import { View, ScrollView, StyleSheet} from 'react-native'
-import {Contact} from "./ContactMessageCards"
 import {SelectContact} from "./SelectContact"
-import {colours} from "../colours"
 import {MultiLineTextFieldComponent} from "../UI/MultiLineTextFieldComponent"
 
 export class ComposeMessage extends React.Component<Props, State> {

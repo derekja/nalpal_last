@@ -1,7 +1,7 @@
 import React from 'react'
 import {ButtonGroup} from 'react-native-elements'
 import {StyleSheet} from "react-native"
-import {colours} from "../colours"
+import {colours} from "./colours"
 
 
 export class TabComponent extends React.Component<Props, State> {

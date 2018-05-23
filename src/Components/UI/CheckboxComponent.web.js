@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyleSheet, View} from 'react-native'
-import {colours} from "../colours"
+import {colours} from "./colours"
 import Checkbox from 'material-ui/Checkbox'
 
 

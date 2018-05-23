@@ -1,6 +1,6 @@
 import React from 'react'
 import Avatar from 'material-ui/Avatar'
-import {generateAvatarColour} from "../colours"
+import {generateAvatarColour} from "./colours"
 
 
 export class AvatarComponent extends React.Component<Props, State> {

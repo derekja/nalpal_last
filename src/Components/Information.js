@@ -1,6 +1,6 @@
 import React from 'react'
 import { View} from 'react-native'
-import {WideButton} from '../Components/WideButton'
+import {WideButton} from './UI/WideButton'
 
 
 

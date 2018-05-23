@@ -1,17 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet} from 'react-native'
-import {ModalComponent} from "../UI/Modal"
-import {ModalButton} from "../UI/ModalButton"
+import { View, StyleSheet} from 'react-native'
 import MapContainer from "../UI/MapContainer"
 import {ConfirmationMessageBox} from "./ConfirmationMessageBox"
 import {EmergencyRequestButton} from "./EmergencyRequestButton"
 
-type Props = {
-    requestLocation: {
-      latitude: number,
-      longitude: number
-    }
-};
 
 export class EmergencyRequestConfirmation extends React.Component {
 

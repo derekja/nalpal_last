@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, TextInput} from 'react-native'
-import {colours} from "../colours"
 
 
 export class MultiLineTextFieldComponent extends React.Component<Props, State> {

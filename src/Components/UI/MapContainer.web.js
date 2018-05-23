@@ -2,7 +2,6 @@ import React from 'react'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 const googleApiKey = "AIzaSyA7yHY-qcFGvp3PUuPgqTlftPYOknKA270";
-const google = window.google;
 
 
 type Props = {

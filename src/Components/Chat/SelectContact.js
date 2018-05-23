@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, ScrollView, Text, StyleSheet} from 'react-native'
-import {Contact} from "./ContactMessageCards"
+import { View, Text, StyleSheet} from 'react-native'
 import {CheckboxComponent} from "../UI/CheckboxComponent"
-import {colours} from "../colours"
+import {colours} from "../UI/colours"
 
 export class SelectContact extends React.Component<Props, State> {
   

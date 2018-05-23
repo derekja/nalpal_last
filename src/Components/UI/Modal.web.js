@@ -1,11 +1,6 @@
-//@flow
 import React from 'react'
 import Dialog from 'material-ui/Dialog'
 
-
-type Props = {
-	isVisible: boolean
-}
 
 export class ModalComponent extends React.Component<Props, State> {
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import {EmergencyMessageBox} from './EmergencyMessageBox'
-import {CancelButton} from '../CancelButton'
+import {CancelButton} from '../UI/CancelButton'
 
 export class EmergencyRequest extends React.Component {
 

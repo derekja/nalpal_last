@@ -1,10 +1,9 @@
 //@flow
 import React from 'react'
 import { Text, StyleSheet, TouchableOpacity } from 'react-native'
-import {withRouter} from '../Routing'
 import {NavButtonType} from './Nav'
-import {SettingsIcon, EmergencyIcon, ChatIcon, InformationIcon} from "./Icons/NavIcons"
-import {colours} from "./colours"
+import {SettingsIcon, EmergencyIcon, ChatIcon, InformationIcon} from "../Icons/NavIcons"
+import {colours} from "../UI/colours"
 
 
 type Props = {
