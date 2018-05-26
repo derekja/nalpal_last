@@ -4,6 +4,7 @@ import {TabComponent} from "../UI/TabComponent"
 import {ContactsContainer} from "./ContactsContainer"
 import {MessagesContainer} from "./MessagesContainer"
 import {ComposeMessage} from "./ComposeMessage"
+import {Header} from "../Navigation/Header"
 
 
 export class Chat extends React.Component<Props, State> {
@@ -49,6 +50,7 @@ export class Chat extends React.Component<Props, State> {
     } else {
       return (
         <View style={styles.chatContainer}>
+        <Header headerTitle="Chat"/>
           <TabComponent handleTabChange= {this.handleTabChange} selectedTabIndex={this.state.selectedTabIndex} tabs={tabs}/>
           <View style={styles.chatContainer}>
             {this.state.selectedTabIndex === 0 && <ContactsContainer contacts={contacts} />}

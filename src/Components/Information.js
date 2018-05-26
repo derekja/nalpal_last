@@ -1,6 +1,7 @@
 import React from 'react'
 import { View} from 'react-native'
 import {WideButton} from './UI/WideButton'
+import {Header} from "./Navigation/Header"
 
 
 
@@ -13,6 +14,7 @@ export class Information extends React.Component<Props, State> {
   render() { 
     return (
         <View>
+        	<Header headerTitle="Information"/>
 	        <WideButton
 	          title="Watch the Tutorial"
 	          buttonStyleType = "secondary"

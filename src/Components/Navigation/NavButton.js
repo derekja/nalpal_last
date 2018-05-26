@@ -1,9 +1,10 @@
 //@flow
 import React from 'react'
-import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, TouchableOpacity, View} from 'react-native'
 import {NavButtonType} from './Nav'
 import {SettingsIcon, EmergencyIcon, ChatIcon, InformationIcon} from "../Icons/NavIcons"
 import {colours} from "../UI/colours"
+import { Route} from '../../Routing'
 
 
 type Props = {
@@ -19,23 +20,23 @@ class NavButton extends React.Component<Props, State> {
   state = {
   }
 
-  onPress = () => {
-    this.props.updateSelectedNavToggle(this.props.type);
+  onPress = (history) => {
+    history.push('/' + this.props.type)
   }
 
   render() { 
     let icon = {};
     switch(this.props.type) {
-      case "Emergency":
+      case "emergency":
         icon = <EmergencyIcon active={this.props.active}/>
         break;
-      case "Chat":
+      case "chat":
         icon = <ChatIcon active={this.props.active}/>
         break;
-      case "Information":
+      case "information":
         icon = <InformationIcon active={this.props.active}/>
         break;
-      case "Settings":
+      case "settings":
         icon = <SettingsIcon active={this.props.active}/>
         break;
       default:
@@ -46,16 +47,18 @@ class NavButton extends React.Component<Props, State> {
       style = [styles.emergencyBackground, ...style]
     }
     return (
-         <TouchableOpacity 
-         activeOpacity={0.7}
-         style={this.props.active? [styles.activeStyle, ...style]  : [styles.inactiveStyle, ...style]}
-         onPress={this.onPress}
-        >
-            {icon}
-            <Text style={this.props.emergencyInProgress? styles.emergencyInProgress : styles.buttonText}>
-            {this.props.title}
-            </Text>
+        <Route render={({history}) => (
+           <TouchableOpacity 
+           activeOpacity={0.7}
+           style={this.props.active? [styles.activeStyle, ...style]  : [styles.inactiveStyle, ...style]}
+           onPress={() => this.onPress(history)}
+          >
+              {icon}
+              <Text style={this.props.emergencyInProgress? styles.emergencyInProgress : styles.buttonText}>
+              {this.props.title}
+              </Text>
           </TouchableOpacity>
+        )}/>
     );
   }
 

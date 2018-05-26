@@ -6,6 +6,7 @@ import {Settings} from './Settings'
 import {Information} from './Information'
 import {NavButtonType} from './Navigation/Nav'
 import {NavWrapper} from './Navigation/NavWrapper'
+import { Route, Redirect} from '../Routing'
 
 type State = {
   UI: {
@@ -30,7 +31,6 @@ export class Main extends React.Component<Props, State> {
 
   state: State = {
     emergencyInProgress: false,
-    selectedNavToggle: "Emergency",
     displayNav: true,
     userLocation: {
       latitude: 48.427325,
@@ -42,10 +42,6 @@ export class Main extends React.Component<Props, State> {
     responder : {
 
     }
-  }
-
-  updateSelectedNavToggle = (toggle: NavButtonType) => {
-    this.setState({selectedNavToggle: toggle});
   }
 
   setEmergencyInProgress = (emergencyInProgress: boolean) => {
@@ -62,54 +58,48 @@ export class Main extends React.Component<Props, State> {
 
   render() {
 
-    let page = {};
-    switch(this.state.selectedNavToggle) {
-      case "Emergency":
-        page = <Emergency 
+    return (
+      <View>
+      {this.props.location.pathname === "/" && <Redirect to="/Emergency"/>}
+      <Route render={() => (
+        !this.props.loggedIn ? (
+          <Redirect to="/auth"/>
+          ) : (
+          <NavWrapper
+          emergencyInProgress={this.state.emergencyInProgress} 
+          displayNav={this.state.displayNav}
+          {...this.props}
+          >
+            <View style={styles.contentContainer}>
+              <MainRouting
                   setEmergencyInProgress={this.setEmergencyInProgress}
                   setResponderState={this.setResponderState}
                   setRequesterState={this.setRequesterState}
                   requester={this.state.requester}
                   responder={this.state.responder}
                   userLocation={this.state.userLocation}
-                />
-        break;
-      case "Chat":
-        page = <Chat/>
-        break;
-      case "Information":
-        page = <Information/>
-        break;
-      case "Settings":
-        page = <Settings/>
-        break;
-      default:
-        break;
-    }
-
-    return (
-      <NavWrapper
-          updateSelectedNavToggle={this.updateSelectedNavToggle} 
-          emergencyInProgress={this.state.emergencyInProgress} 
-          selectedNavToggle={this.state.selectedNavToggle}
-          displayNav={this.state.displayNav}
-
-      >
-        <View style={styles.contentContainer}>
-          {page}
-        </View>
-      </NavWrapper>
+              />
+            </View>
+          </NavWrapper>
+          )
+      )}/>
+      </View>
     );
   }
 
 }
 
+const MainRouting = (emergencyProps) => (
+  <View style={styles.contentContainesr}>
+    <Route path="/chat" component={Chat}/>
+    <Route path="/information" component={Information} />
+    <Route path="/settings" component={Settings} />
+    <Route path="/emergency" render={() => (<Emergency  {...emergencyProps} />)}/>
+  </View>
+);
+
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1
-  },
-  nalpalHeader: {
-    fontSize: 20,
-    fontWeight: 'bold'
   }
 });

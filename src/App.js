@@ -18,9 +18,9 @@ export default class App extends Component {
     return (
       <Router>
         <Switch>
-              {this.state.loggedIn && <Route exact path="/*" component={Main} />}
-              {!this.state.loggedIn && <Route exact path="/*"  render={(props) => (<Auth setLoggedIn={this.setLoggedIn}/>)} />}
-          </Switch>
+            <Route path="/auth"  render={(props) => (<Auth setLoggedIn={this.setLoggedIn}/>)} />
+            <Route exact path="/*" render={(props) => (<Main {...props} loggedIn={this.state.loggedIn}/>)} />
+        </Switch>
     </Router>
     )
   }

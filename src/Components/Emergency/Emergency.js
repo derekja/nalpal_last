@@ -1,10 +1,10 @@
 import React from 'react'
-import { View } from 'react-native'
-import {WideButton} from '../UI/WideButton'
+import {View} from "react-native"
 import {EmergencyRequest} from './EmergencyRequest'
 import {EmergencyResponse} from './EmergencyResponse'
 import {EmergencyResponseConfirmation} from './EmergencyResponseConfirmation'
 import {EmergencyRequestConfirmation} from './EmergencyRequestConfirmation'
+import {EmergencyMainPage} from "./EmergencyMainPage"
 
 
 export class Emergency extends React.Component<Props, State> {
@@ -64,28 +64,6 @@ export class Emergency extends React.Component<Props, State> {
     this.props.setEmergencyInProgress(true);
   }
 
-  openGlobalConfirmationScreen = () => {
-      const requester = { 
-        requestType: "GLOBAL_REQUEST",
-        confirmationPending: true,
-        requestLocation: {
-            latitude: 48.428394,
-            longitude: -123.349839
-          }};
-      this.props.setRequesterState(requester);
-  }
-
-  openContactConfirmationScreen = () => {
-      const requester = { 
-        requestType: "CONTACT_REQUEST",
-        confirmationPending: true,
-        requestLocation: {
-            latitude: 48.428394,
-            longitude: -123.349839
-          }};
-      this.props.setRequesterState(requester);
-  }
-
 
   render() {
 
@@ -94,67 +72,46 @@ export class Emergency extends React.Component<Props, State> {
       longitude: -123.349839
     }
 
-    if (this.props.requester.requestLocation && !this.props.requester.confirmationPending) {
-      return (<EmergencyRequest
+    let page = {}
+
+    if (this.props.requester.requestLocation) {
+      if (this.props.requester.requestPending) {
+        page = <EmergencyRequestConfirmation 
+                requester={this.props.requester}
+                clearRequestData={this.clearRequestData}
+                sendEmergencyRequest={this.sendEmergencyRequest}
+                requestLocation={requestLocation}
+                isVisible={this.props.requester.confirmationPending}/>
+      } else {
+          page = <EmergencyRequest
                   requester={this.props.requester}
-                  clearRequestData={this.clearRequestData}/>);
-    } else if (this.props.responder.requestLocation && !this.props.responder.requestPending) {
-      return (<EmergencyResponse 
+                  clearRequestData={this.clearRequestData}/>
+      }
+    } else if (this.props.responder.requestLocation) {
+        if (this.props.responder.requestPending) {
+            page = <EmergencyResponseConfirmation 
+                  clearResponseData={this.clearResponseData}
+                  acceptRequestToRespond={this.acceptRequestToRespond}
+                  requestLocation={this.props.responder.requestLocation}
+                  contactName={this.props.responder.contactName}
+                  userLocation={this.props.userLocation}
+                  isVisible={this.props.responder.requestPending}/>
+        } else {
+          page = <EmergencyResponse 
                     clearResponseData={this.clearResponseData}
                     acceptRequestToRespond={this.acceptRequestToRespond}
                     requestLocation={this.props.responder.requestLocation}/>
-              );
+        }
     } else {
-      return (
-        <View>
-                <WideButton
-          title="Call 911"
-          buttonStyleType = "secondary"
-        />
-        <WideButton
-          title="Send a customized message to friends"
-          buttonStyleType = "secondary"
-          onPress={this.openContactConfirmationScreen}
-        />
-        <WideButton
-          title="Emergency! Get me a Kit!"
-          buttonStyleType = "main"
-          onPress={this.openGlobalConfirmationScreen}
-        />
-      </View>
-
-    );
+      page = <EmergencyMainPage setRequesterState={this.props.setRequesterState}/>
     }
+
+    return (
+      <View>
+          {page}
+      </View>
+    )
   }
 
 }
 
-// <EmergencyResponseConfirmation 
-//                   clearResponseData={this.clearResponseData}
-//                   acceptRequestToRespond={this.acceptRequestToRespond}
-//                   requestLocation={this.props.responder.requestLocation}
-//                   contactName={this.props.responder.contactName}
-//                   userLocation={this.props.userLocation}
-//                   isVisible={this.props.responder.requestPending}/>
-        // <WideButton
-        //   title="Call 911"
-        //   buttonStyleType = "secondary"
-        // />
-        // <WideButton
-        //   title="Send a customized message to friends"
-        //   buttonStyleType = "secondary"
-        //   onPress={this.openContactConfirmationScreen}
-        // />
-        // <WideButton
-        //   title="Emergency! Get me a Kit!"
-        //   buttonStyleType = "main"
-        //   onPress={this.openGlobalConfirmationScreen}
-        // />
-
-
-// <EmergencyRequestConfirmation 
-//                 requester={this.props.requester}
-//                 clearRequestData={this.clearRequestData}
-//                 sendEmergencyRequest={this.sendEmergencyRequest}
-//                 requestLocation={requestLocation}
-//                 isVisible={this.props.requester.confirmationPending}/>

@@ -11,7 +11,6 @@ export class NavWrapper extends React.Component<Props, State> {
     return (
       <MuiThemeProvider>
         <View style={styles.flexContainer}>
-          <Header {...this.props}/>
           <View style={this.props.displayNav? styles.contentContainerWithNav : styles.contentContainerNoNav}>
             {this.props.children}
           </View>

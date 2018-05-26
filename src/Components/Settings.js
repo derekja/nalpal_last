@@ -1,6 +1,7 @@
 import React  from 'react'
 import { View  } from 'react-native'
 import {WideButton} from './UI/WideButton'
+import {Header} from "./Navigation/Header"
 
 
 
@@ -14,6 +15,7 @@ export class Settings extends React.Component<Props, State> {
   render() { 
     return (
         <View>
+        	<Header headerTitle="Settings"/>
 	        <WideButton
 	          title="Update Kit Status"
 	          buttonStyleType = "secondary"

@@ -6,18 +6,21 @@ import {colours} from "../UI/colours"
 
 export type NavButtonType = "Emergency" | "Chat" | "Information" | "Settings";
 
-type Props = {
-  updateSelectedNavToggle: (NavButtonType) => void,
-  selectedNavToggle: NavButtonType
-}
 
 export class Nav extends React.Component<Props, State> {
 
+  getCurrentNavToggle = () => {
+
+    const regex = new RegExp("[^/]+", "i")
+    const match = regex.exec(this.props.location.pathname)
+    return (match[0])
+  }
 
   render() {
-    let emergencyNavButton = <NavButton type={"Emergency"} title="Emergency" active={this.props.selectedNavToggle === "Emergency"} updateSelectedNavToggle={this.props.updateSelectedNavToggle}/>;
-    if (this.props.emergencyInProgress && !(this.props.selectedNavToggle === "Emergency")) {
-      emergencyNavButton = <NavButton type={"Emergency"} title="Emergency In Progress" emergencyInProgress={this.props.emergencyInProgress} active={this.props.selectedNavToggle === "Emergency"} updateSelectedNavToggle={this.props.updateSelectedNavToggle}/>
+    const path = this.getCurrentNavToggle()
+    let emergencyNavButton = <NavButton type={"emergency"} title="Emergency" active={path === "emergency"}/>;
+    if (this.props.emergencyInProgress && !(path === "emergency")) {
+      emergencyNavButton = <NavButton type={"emergency"} title="Emergency In Progress" emergencyInProgress={this.props.emergencyInProgress} active={this.props.selectedNavToggle === "Emergency"} />
     }
     return (
         <View
@@ -25,9 +28,9 @@ export class Nav extends React.Component<Props, State> {
         >
           <View style={styles.navStyles}>
              {emergencyNavButton}
-             <NavButton type={"Chat"} title="Chat" active={this.props.selectedNavToggle === "Chat"} updateSelectedNavToggle={this.props.updateSelectedNavToggle}/>
-             <NavButton type={"Information"} title="Information" active={this.props.selectedNavToggle === "Information"} updateSelectedNavToggle={this.props.updateSelectedNavToggle}/>
-             <NavButton type={"Settings"} title="Settings" noMargin={true} active={this.props.selectedNavToggle === "Settings"} updateSelectedNavToggle={this.props.updateSelectedNavToggle}/>
+             <NavButton type={"chat"} title="Chat" active={path === "chat"} />
+             <NavButton type={"information"} title="Information" active={path === "information"} />
+             <NavButton type={"settings"} title="Settings" noMargin={true} active={path === "settings"} />
           </View>
         </View>
     );

@@ -13,7 +13,7 @@ export class Header extends React.Component<Props, State> {
           style={styles.container}
         >
           <Text style={styles.headerText}>
-            {this.props.selectedNavToggle}
+            {this.props.headerTitle}
           </Text>
         </View>
     );

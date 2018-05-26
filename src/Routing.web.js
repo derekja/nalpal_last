@@ -3,5 +3,6 @@ export {
   Switch,
   Route,
   Link,
-  withRouter
+  withRouter,
+  Redirect
 } from 'react-router-dom'
