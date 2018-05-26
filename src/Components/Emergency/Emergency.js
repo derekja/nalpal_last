@@ -75,7 +75,7 @@ export class Emergency extends React.Component<Props, State> {
     let page = {}
 
     if (this.props.requester.requestLocation) {
-      if (this.props.requester.requestPending) {
+      if (this.props.requester.confirmationPending) {
         page = <EmergencyRequestConfirmation 
                 requester={this.props.requester}
                 clearRequestData={this.clearRequestData}
@@ -88,7 +88,7 @@ export class Emergency extends React.Component<Props, State> {
                   clearRequestData={this.clearRequestData}/>
       }
     } else if (this.props.responder.requestLocation) {
-        if (this.props.responder.requestPending) {
+        if (this.props.responder.confirmationPending) {
             page = <EmergencyResponseConfirmation 
                   clearResponseData={this.clearResponseData}
                   acceptRequestToRespond={this.acceptRequestToRespond}

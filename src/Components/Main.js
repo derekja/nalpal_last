@@ -60,7 +60,6 @@ export class Main extends React.Component<Props, State> {
 
     return (
       <View>
-      {this.props.location.pathname === "/" && <Redirect to="/Emergency"/>}
       <Route render={() => (
         !this.props.loggedIn ? (
           <Redirect to="/auth"/>
