@@ -7,6 +7,7 @@ import {Information} from './Information'
 import {NavButtonType} from './Navigation/Nav'
 import {NavWrapper} from './Navigation/NavWrapper'
 import { Route, Redirect} from '../Routing'
+import has from 'lodash/has'
 
 type State = {
   UI: {
@@ -30,7 +31,7 @@ type State = {
 export class Main extends React.Component<Props, State> {
 
   state: State = {
-    emergencyInProgress: false,
+    id: "8308a4c0315cbf6c25568be241d4afc5",
     displayNav: true,
     userLocation: {
       latitude: 48.427325,
@@ -41,11 +42,8 @@ export class Main extends React.Component<Props, State> {
     },
     responder : {
 
-    }
-  }
-
-  setEmergencyInProgress = (emergencyInProgress: boolean) => {
-    this.setState({emergencyInProgress: emergencyInProgress});
+    },
+    contacts: []
   }
 
   setResponderState = (responder) => {
@@ -55,28 +53,38 @@ export class Main extends React.Component<Props, State> {
     this.setState({requester: requester});
   }
 
+  changeState = (changedStateObjects) => {
+      let newState = Object.assign(this.state, changedStateObjects)
+      this.setState(newState)
+  }
+
 
   render() {
+    let emergencyInProgress = false
+    if (has(this.state.requester, 'requestLocation') || has(this.state.responder, 'requestLocation')) {
+      emergencyInProgress = true
+      console.log("yes")
+    }
 
     return (
-      <View>
+      <View style={styles.contentContainer}>
       <Route render={() => (
         !this.props.loggedIn ? (
           <Redirect to="/auth"/>
           ) : (
           <NavWrapper
-          emergencyInProgress={this.state.emergencyInProgress} 
+          emergencyInProgress={emergencyInProgress} 
           displayNav={this.state.displayNav}
           {...this.props}
           >
             <View style={styles.contentContainer}>
               <MainRouting
-                  setEmergencyInProgress={this.setEmergencyInProgress}
-                  setResponderState={this.setResponderState}
-                  setRequesterState={this.setRequesterState}
                   requester={this.state.requester}
                   responder={this.state.responder}
                   userLocation={this.state.userLocation}
+                  changeState = {this.changeState}
+                  id={this.state.id}
+                  contacts={this.state.contacts}
               />
             </View>
           </NavWrapper>
@@ -88,12 +96,12 @@ export class Main extends React.Component<Props, State> {
 
 }
 
-const MainRouting = (emergencyProps) => (
-  <View style={styles.contentContainesr}>
-    <Route path="/chat" component={Chat}/>
+const MainRouting = (props) => (
+  <View style={styles.contentContainer}>
+    <Route path="/chat" render={() => (<Chat  id={props.id} contacts={props.contacts} changeState={props.changeState}/>)}/>
     <Route path="/information" component={Information} />
     <Route path="/settings" component={Settings} />
-    <Route path="/emergency" render={() => (<Emergency  {...emergencyProps} />)}/>
+    <Route path="/emergency" render={() => (<Emergency  {...props} />)}/>
   </View>
 );
 

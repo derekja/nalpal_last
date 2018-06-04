@@ -15,7 +15,7 @@ export class EmergencyMainPage extends React.Component<Props, State> {
             latitude: 48.428394,
             longitude: -123.349839
           }};
-      this.props.setRequesterState(requester);
+      this.props.changeState({requester: requester})
   }
   
   openContactConfirmationScreen = () => {
@@ -26,8 +26,10 @@ export class EmergencyMainPage extends React.Component<Props, State> {
             latitude: 48.428394,
             longitude: -123.349839
           }};
-      this.props.setRequesterState(requester);
+      this.props.changeState({requester: requester})
   }
+
+
 
   render() {
 

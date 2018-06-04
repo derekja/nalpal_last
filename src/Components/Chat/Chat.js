@@ -4,7 +4,9 @@ import {TabComponent} from "../UI/TabComponent"
 import {ContactsContainer} from "./ContactsContainer"
 import {MessagesContainer} from "./MessagesContainer"
 import {ComposeMessage} from "./ComposeMessage"
+import {AddContact} from "./AddContact"
 import {Header} from "../Navigation/Header"
+import {getFriends, postAddFriend} from "../../Requests/friends"
 
 
 export class Chat extends React.Component<Props, State> {
@@ -13,7 +15,10 @@ export class Chat extends React.Component<Props, State> {
     super(props);
     this.state = {
       selectedTabIndex: 0,
-      actionScreenOpen: null
+      actionScreenOpen: null,
+      contactState: {
+      }
+
     };
   }
 
@@ -27,8 +32,43 @@ export class Chat extends React.Component<Props, State> {
     this.setState({actionScreenOpen: "composeMessage"})
   }
 
+  openAddContact = () => {
+    this.setState({actionScreenOpen: "addContact"})
+  }
+
   closeActionScreen = () => {
-    this.setState({actionScreenOpen: null})
+    this.setState({actionScreenOpen: null, contactState: {}})
+  }
+
+  fetchContacts = () => {
+    getFriends(this.props.id).then(
+      value => {this.addContactsToState(value.data)}
+      )
+  }
+
+  // fetchContacts = () => {
+  //   getFriends(this.props.id).then(
+  //     (value) => {console.log(value)}
+  //     )
+  // }
+
+  addContactsToState = (data) => {
+      this.props.changeState({contacts: data})
+  }
+
+  addFriend = (contactUsername) => {
+    postAddFriend(contactUsername, null, null, this.props.id).then(
+      (value) => {
+        this.setState({contactState: {addContactSuccess: true}})
+      },
+      (error) => {
+        this.setState({contactState: {errorMessage: error.message}})
+      })
+  }
+
+
+  componentWillMount() {
+    this.fetchContacts()
   }
 
 
@@ -44,7 +84,12 @@ export class Chat extends React.Component<Props, State> {
     if (this.state.actionScreenOpen) {
       return (
         <View style={styles.chatContainer}>
-          {this.state.actionScreenOpen === "composeMessage" && <ComposeMessage contacts={contacts}/>}
+          {this.state.actionScreenOpen === "composeMessage" && <ComposeMessage contacts={this.props.contacts}/>}
+          {this.state.actionScreenOpen === "addContact" && <AddContact 
+                                                                  addFriend={this.addFriend} 
+                                                                  contacts={this.props.contacts} 
+                                                                  contactState={this.state.contactState}
+                                                                  closeActionScreen={this.closeActionScreen}/>}
         </View>
         );
     } else {
@@ -53,7 +98,9 @@ export class Chat extends React.Component<Props, State> {
         <Header headerTitle="Chat"/>
           <TabComponent handleTabChange= {this.handleTabChange} selectedTabIndex={this.state.selectedTabIndex} tabs={tabs}/>
           <View style={styles.chatContainer}>
-            {this.state.selectedTabIndex === 0 && <ContactsContainer contacts={contacts} />}
+            {this.state.selectedTabIndex === 0 && <ContactsContainer 
+                                                          contacts={this.props.contacts} 
+                                                          openAddContact={this.openAddContact} />}
             {this.state.selectedTabIndex === 1 && <MessagesContainer 
                                                           openComposeMessage={this.openComposeMessage}
                                                           messages={messages} />}
@@ -122,5 +169,3 @@ const styles = StyleSheet.create({
   
 });
 
-//{this.state.selectedTabIndex == 0 && <ContactsContainer contacts={contacts} />}
-//{this.state.selectedTabIndex == 1 && <MessagesContainer messages={messages} />}

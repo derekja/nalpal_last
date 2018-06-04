@@ -10,6 +10,18 @@ import {EmergencyRequestButton} from "./EmergencyRequestButton"
 
 export class EmergencyResponseConfirmation extends React.Component {
 
+  declineRequest = () => {
+    this.props.changeState({responder: {}})
+  }
+
+  acceptRequestToRespond = () => {
+      const responder = {
+        requestPending: false, 
+        requestLocation: this.props.responder.requestLocation
+      }
+      this.props.changeState({responder: responder});
+  }
+
   render() {
     const message = "Thank you for helping me, I am in room 253, the code to the building is 8819, my door is unlocked"
     return (
@@ -19,8 +31,8 @@ export class EmergencyResponseConfirmation extends React.Component {
             <ConfirmationMessageBox  message={message}/>
         </View>
         <View style={styles.buttonContainer}>
-              <EmergencyRequestButton title="Dismiss for Now" onPress={this.props.clearResponseData}/>
-              <EmergencyRequestButton confirm={true} title = "Respond to Emergency" onPress={this.props.acceptRequestToRespond}/>
+              <EmergencyRequestButton title="Dismiss for Now" onPress={this.declineRequest}/>
+              <EmergencyRequestButton confirm={true} title = "Respond to Emergency" onPress={this.acceptRequestToRespond}/>
         </View>
       </View>
     );

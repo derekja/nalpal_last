@@ -5,6 +5,9 @@ import {CancelButton} from '../UI/CancelButton'
 
 export class EmergencyRequest extends React.Component {
 
+  cancelRequest = () => {
+      this.props.changeState({requester: {}})
+  }
 
   render() {
     const messages = [
@@ -16,7 +19,7 @@ export class EmergencyRequest extends React.Component {
       <View>
         <CancelButton
           title="Cancel Emergency"
-          onPress={this.props.clearRequestData}
+          onPress={this.cancelRequest}
         />
         <Text style={styles.textBox}>
           There are currently 2 people who have responded, the closest is 250m away

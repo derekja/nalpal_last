@@ -15,7 +15,7 @@ export class ContactsContainer extends React.Component<Props, State> {
       <ScrollView>
         {contacts}
       </ScrollView>
-      <AddButton/>
+      <AddButton onPress={this.props.openAddContact}/>
       </View>
     );
   }

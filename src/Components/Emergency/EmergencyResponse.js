@@ -4,18 +4,11 @@ import MapContainer from '../UI/MapContainer'
 import {EmergencyMessageBox} from './EmergencyMessageBox'
 import {CancelButton} from '../UI/CancelButton'
 
-type Props = {
-    requestLocation: {
-      latitude: number,
-      longitude: number
-    },
-    contactName: string,
-    requestPending: boolean,
-    clearResponseData: () => void,
-    acceptRequestToRespond: () => void
-};
 export class EmergencyResponse extends React.Component<Props, State> {
 
+  cancelResponse = () => {
+      this.props.changeState({responder: {}})
+  }
 
   render() {
     const messages = [
@@ -27,7 +20,7 @@ export class EmergencyResponse extends React.Component<Props, State> {
         <View>
           <CancelButton
             title="Cancel Response"
-            onPress={this.props.clearResponseData}
+            onPress={this.cancelResponse}
           />
             <Text style={styles.textBox}>
               There is currently 1 other person who has also responded, you are closest at 250m away, the next closest is 550m away

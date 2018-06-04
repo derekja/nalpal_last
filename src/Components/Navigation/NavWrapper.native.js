@@ -9,7 +9,6 @@ export class NavWrapper extends React.Component<Props, State> {
 
     return (
       <View style={{flex: 1}}>
-        <Header {...this.props}/>
           {this.props.children}
         {this.props.displayNav && <Nav {...this.props}/>}
       </View>

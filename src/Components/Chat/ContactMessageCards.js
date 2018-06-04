@@ -29,14 +29,15 @@ export class Contact extends React.Component<Props, State> {
   }
 
   render() { 
-    const initial = this.props.contactName.charAt(0)
+    const contactName = this.props.contactName? this.props.contactName : ""
+    const initial = contactName.charAt(0)
     return (
       <AvatarWrapper
         title={initial}
         id={this.props.id}
         >
             <Text style={styles.contactName}>
-              {this.props.contactName}
+              {contactName}
             </Text>
             {this.props.nickname && <Text>
               ({this.props.nickname})
