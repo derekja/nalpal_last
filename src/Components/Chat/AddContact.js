@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet} from 'react-native'
-import {colours} from "../UI/colours"
 import {TextFieldComponent} from "../UI/TextFieldComponent"
 import {CancelButton} from "../UI/CancelButton"
 import {WideButton} from "../UI/WideButton"

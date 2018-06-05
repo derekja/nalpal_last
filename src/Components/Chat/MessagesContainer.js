@@ -25,7 +25,7 @@ export class MessagesContainer extends React.Component<Props, State> {
         } else {
           messageName = messageName + " and " + contacts[n + 1]
         }
-        return (<Message messageName={messageName} key={i} id={i}/>)
+        return (<Message messageName={messageName} key={i} index={i} id={i}/>)
       }
     );
     return (

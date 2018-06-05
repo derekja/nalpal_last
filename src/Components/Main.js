@@ -31,7 +31,7 @@ type State = {
 export class Main extends React.Component<Props, State> {
 
   state: State = {
-    id: "8308a4c0315cbf6c25568be241d4afc5",
+    id: "afaf0a7135e4a4dfa7389bf77676c967",
     displayNav: true,
     userLocation: {
       latitude: 48.427325,
@@ -43,7 +43,8 @@ export class Main extends React.Component<Props, State> {
     responder : {
 
     },
-    contacts: []
+    contacts: [],
+    pendingContacts: []
   }
 
   setResponderState = (responder) => {
@@ -85,6 +86,7 @@ export class Main extends React.Component<Props, State> {
                   changeState = {this.changeState}
                   id={this.state.id}
                   contacts={this.state.contacts}
+                  pendingContacts={this.state.pendingContacts}
               />
             </View>
           </NavWrapper>
@@ -98,7 +100,7 @@ export class Main extends React.Component<Props, State> {
 
 const MainRouting = (props) => (
   <View style={styles.contentContainer}>
-    <Route path="/chat" render={() => (<Chat  id={props.id} contacts={props.contacts} changeState={props.changeState}/>)}/>
+    <Route path="/chat" render={() => (<Chat  id={props.id} contacts={props.contacts} pendingContacts={props.pendingContacts} changeState={props.changeState}/>)}/>
     <Route path="/information" component={Information} />
     <Route path="/settings" component={Settings} />
     <Route path="/emergency" render={() => (<Emergency  {...props} />)}/>

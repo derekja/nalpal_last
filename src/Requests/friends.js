@@ -26,20 +26,20 @@ export async function postAddFriend(username: string, email: string, mobile: str
   }
 }
 
-export async function postVerifyFriendRequest(requesterID: requesterID, responderID: responderID):Promise<any> {
+export async function postVerifyFriendRequest(requesterID, responderID):Promise<any> {
   try {
-    let response: any = await fetch(apiURL + "friendservice/verifyFriend", {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      "requesterID": requesterID,
-      "responderID": responderID
-    }),
-  });
+    let response: any = await fetch(apiURL + "/friendservice/verifyFriend", {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "requesterID": requesterID,
+        "responderID": responderID
+      }),
+    });
     let responseJson = await response.json();
     return responseJson;
   } catch (error) {

@@ -6,7 +6,7 @@ import {generateAvatarColour} from "./colours"
 export class AvatarComponent extends React.Component<Props, State> {
 
   render() { 
-  	const color = generateAvatarColour(this.props.id) 
+  	const color = generateAvatarColour(this.props.index) 
     return (
       <Avatar
       	size={40}

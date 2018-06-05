@@ -2,7 +2,6 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Nav} from './Nav'
-import {Header} from './Header'
 
 export class NavWrapper extends React.Component<Props, State> {
 

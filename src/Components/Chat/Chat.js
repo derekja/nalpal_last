@@ -6,7 +6,7 @@ import {MessagesContainer} from "./MessagesContainer"
 import {ComposeMessage} from "./ComposeMessage"
 import {AddContact} from "./AddContact"
 import {Header} from "../Navigation/Header"
-import {getFriends, postAddFriend} from "../../Requests/friends"
+import {getFriends, postAddFriend, getPendingRequests, postVerifyFriendRequest} from "../../Requests/friends"
 
 
 export class Chat extends React.Component<Props, State> {
@@ -42,18 +42,8 @@ export class Chat extends React.Component<Props, State> {
 
   fetchContacts = () => {
     getFriends(this.props.id).then(
-      value => {this.addContactsToState(value.data)}
+      value => { this.props.changeState({contacts: value.data})}
       )
-  }
-
-  // fetchContacts = () => {
-  //   getFriends(this.props.id).then(
-  //     (value) => {console.log(value)}
-  //     )
-  // }
-
-  addContactsToState = (data) => {
-      this.props.changeState({contacts: data})
   }
 
   addFriend = (contactUsername) => {
@@ -66,17 +56,35 @@ export class Chat extends React.Component<Props, State> {
       })
   }
 
+  fetchPendingRequests = () => {
+    getPendingRequests(this.props.id).then(
+        (value) => {
+          this.props.changeState({pendingContacts: value.data})
+        }
+      )
+  }
+
+  verifyFriendRequest = (friendId) => {
+      postVerifyFriendRequest(friendId, this.props.id).then(
+        (value) => {
+            this.fetchPendingRequests()
+            this.fetchContacts()
+        }
+      )
+  }
+
 
   componentWillMount() {
+    this.fetchPendingRequests()
     this.fetchContacts()
   }
 
 
 
   render() { 
-    const contacts = [{contactName:"Raybird6601", nickname: "Ray"}, {contactName:"MissMaryMac", nickname: "Mary"}, 
-    {contactName: "Creancer930", nickname: "Rebecca, met at party"},{ contactName: "ArclightVYNE", nickname: "Andrew, across the hall"}, {contactName: "Jeff627", nickname: "Jeff"},
-     {contactName: "Contact0001", nickname: null}];
+    // const contacts = [{contactName:"Raybird6601", nickname: "Ray"}, {contactName:"MissMaryMac", nickname: "Mary"}, 
+    // {contactName: "Creancer930", nickname: "Rebecca, met at party"},{ contactName: "ArclightVYNE", nickname: "Andrew, across the hall"}, {contactName: "Jeff627", nickname: "Jeff"},
+    //  {contactName: "Contact0001", nickname: null}];
      const messages=[{contacts: ["MissMaryMac", "ArclightVYNE", "Raybird6601"]}, {contacts: ["MissMaryMac", "Creancer930"]},
       {contacts: ["ArclightVYNE", "Jeff627", "DamletHanish", "Creancer930", "MissMaryMac", "User0001"]}, {contacts: ["Jeff627", "DamletHanish", "Creancer930", "User0001"]}];
     const tabs = ["Contacts", "Messages"];
@@ -100,6 +108,8 @@ export class Chat extends React.Component<Props, State> {
           <View style={styles.chatContainer}>
             {this.state.selectedTabIndex === 0 && <ContactsContainer 
                                                           contacts={this.props.contacts} 
+                                                          verifyFriendRequest={this.verifyFriendRequest}
+                                                          pendingContacts={this.props.pendingContacts}
                                                           openAddContact={this.openAddContact} />}
             {this.state.selectedTabIndex === 1 && <MessagesContainer 
                                                           openComposeMessage={this.openComposeMessage}

@@ -1,6 +1,6 @@
 //@flow
 import React from 'react'
-import { Text, StyleSheet, TouchableOpacity, View} from 'react-native'
+import { Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {NavButtonType} from './Nav'
 import {SettingsIcon, EmergencyIcon, ChatIcon, InformationIcon} from "../Icons/NavIcons"
 import {colours} from "../UI/colours"
