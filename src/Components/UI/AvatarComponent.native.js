@@ -15,7 +15,7 @@ export class AvatarComponent extends React.Component<Props, State> {
       	rounded
       	source={this.props.source}
       	title={this.props.title}
-      	containerStyle={{backgroundColor: color, minWidth: 40}}
+      	containerStyle={{backgroundColor: color}}
       />
     );
   }

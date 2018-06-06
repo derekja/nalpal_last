@@ -4,7 +4,7 @@ import {Contact} from "./ContactMessageCards"
 import {AddButton} from "../UI/AddButton"
 import {ModalComponent} from "../UI/Modal"
 import {ModalButton} from "../UI/ModalButton"
-import {CancelButton} from "../UI/CancelButton"
+import {CloseButton} from "../UI/CloseButton"
 
 export class ContactsContainer extends React.Component<Props, State> {
   
@@ -51,15 +51,16 @@ export class ContactsContainer extends React.Component<Props, State> {
       </ScrollView>
       <AddButton onPress={this.props.openAddContact}/>
       <ModalComponent isVisible={this.state.friendRequestDialogOpen}>
-          <CancelButton
-          title="Back"
+          <CloseButton
           onPress={this.closeFriendRequestDialog}
           />
-          <Text> Approve friend request from {this.state.selectedContact.username}?</Text>
-          <ModalButton
-            title="Approve"
-            onPress={this.approveFriendRequest}
-          />
+          <Text style={styles.modalText}> Approve friend request from {this.state.selectedContact.username}?</Text>
+          <View style={styles.modalButtonWrapper}>
+            <ModalButton
+              title="Approve"
+              onPress={this.approveFriendRequest}
+            />
+          </View>
       </ModalComponent>
       </View>
     );
@@ -68,6 +69,16 @@ export class ContactsContainer extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   flex: {
-    flex: 1
+    flex: 1,
   },
+  modalText: {
+    textAlign: 'center',
+    width: '100%'
+  },
+  modalButtonWrapper: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    margin: 20
+  }
 });

@@ -13,7 +13,7 @@ export class ModalComponent extends React.Component<Props, State> {
       <Modal 
        visible={this.props.isVisible? this.props.isVisible : false}
        onRequestClose={() => {}}>
-          {this.props.children}
+             {this.props.children}
       </Modal>
     );
   }

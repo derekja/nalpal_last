@@ -1,9 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import MapContainer from '../UI/MapContainer'
-import {EmergencyMessageBox} from './EmergencyMessageBox'
-import {ModalComponent} from "../UI/Modal"
-import {ModalButton} from "../UI/ModalButton"
 import {ConfirmationMessageBox} from "./ConfirmationMessageBox"
 import {EmergencyRequestButton} from "./EmergencyRequestButton"
 
@@ -52,60 +49,4 @@ const styles = StyleSheet.create({
     height: 55
   }
 });
-
-const ContactRequestModal = ({requestLocation, messages, contactName, acceptRequestToRespond, clearResponseData, isVisible}) => (
-  <ModalComponent isVisible={isVisible}>
-        <Text style={styles.heading}>
-          Urgent Message From a Contact
-        </Text>
-        <View style={styles.infoContainer}>
-          <View style={styles.infoColumn}>
-            <EmergencyMessageBox messages={messages}/>
-          </View>
-          <View style={styles.infoColumn}>
-            <Text>One of your contacts {contactName} has requested help can you respond? They are 1.4 km away, and currently, two other people have responded.</Text>
-            <View style={styles.mapWrapper}>
-              <MapContainer requestLocation={requestLocation}/>
-            </View>
-          </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <ModalButton
-            title="I cannot Respond"
-            onPress={clearResponseData}
-          />
-          <ModalButton
-            title="Reply to message"
-          />
-          <ModalButton
-            title="Yes, I can respond"
-            onPress={acceptRequestToRespond}
-          />
-        </View>
-      </ModalComponent>
-);
-
-const GeneralRequestModal = ({requestLocation, acceptRequestToRespond, clearResponseData, isVisible}) => (
-  <ModalComponent isVisible={isVisible}>
-        <Text style={styles.heading}>
-          Help Requested
-        </Text>
-        <Text style={styles.centeredText}>
-            Someone 400m away has urgently requested a Naloxone kit. Currently, no-one else has responded, can you respond?
-        </Text>
-        <View style={styles.mapWrapper}>
-              <MapContainer requestLocation={requestLocation}/>
-        </View>
-        <View style={styles.buttonContainer}>
-          <ModalButton
-            title="I cannot Respond"
-            onPress={clearResponseData}
-          />
-          <ModalButton
-            title="Yes, I can respond"
-            onPress={acceptRequestToRespond}
-          />
-        </View>
-    </ModalComponent>
-);
 
