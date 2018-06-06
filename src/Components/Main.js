@@ -87,6 +87,7 @@ export class Main extends React.Component<Props, State> {
                   id={this.state.id}
                   contacts={this.state.contacts}
                   pendingContacts={this.state.pendingContacts}
+                  logOut={this.props.logOut}
               />
             </View>
           </NavWrapper>
@@ -102,7 +103,7 @@ const MainRouting = (props) => (
   <View style={styles.contentContainer}>
     <Route path="/chat" render={() => (<Chat  id={props.id} contacts={props.contacts} pendingContacts={props.pendingContacts} changeState={props.changeState}/>)}/>
     <Route path="/information" component={Information} />
-    <Route path="/settings" component={Settings} />
+    <Route path="/settings" render={() => (<Settings  logOut={props.logOut} />)} />
     <Route path="/emergency" render={() => (<Emergency  {...props} />)}/>
   </View>
 );

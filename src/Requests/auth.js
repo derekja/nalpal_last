@@ -33,7 +33,7 @@ export async function postLogin(username: string, password: string):Promise<any>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "userName": username,
+      "username": username,
       "password": password
     }),
   });

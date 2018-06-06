@@ -4,25 +4,35 @@ import {TextFieldComponent} from '../UI/TextFieldComponent'
 import {postRegisterUser, postLogin} from "../../Requests/auth"
 import {WideButton} from "../UI/WideButton"
 import {colours} from "../UI/colours"
+import { Route, Redirect} from '../../Routing'
+import {storeItem, fetchItem, storeLoginInfo, fetchLoginInfo} from "../../Helpers/storage"
 
 export class Auth extends React.Component<Props, State> {
 
-  state = {
-    username: null,
-    password: null,
-    email: null,
-    mobile: null,
-    register: true
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: null,
+      password: null,
+      email: null,
+      mobile: null,
+      register: true,
+    };
   }
 
   onTextFieldChange = (id, value) => {
     this.setState({[id]: value});
   }
 
+  setLoginState(username, password) {
+    this.setState({username: username, password: password});
+  }
+
   submitRegisterForm = () => {
     postRegisterUser(this.state.username, this.state.email, this.state.mobile, this.state.password).then(
         (response) => {
-        this.props.setLoggedIn(response.id)
+          storeLoginInfo(this.state.username, this.state.password)
+          this.props.setLoggedIn(response.id)
         }
       )
   }
@@ -30,7 +40,9 @@ export class Auth extends React.Component<Props, State> {
   submitLoginForm = () => {
     postLogin(this.state.username, this.state.password).then(
         (response) => {
+          console.log(response)
           if (response.status === "Login Successful") {
+              storeLoginInfo(this.state.username, this.state.password)
               this.props.setLoggedIn(response.id)
           }
         }
@@ -45,31 +57,49 @@ export class Auth extends React.Component<Props, State> {
     this.setState({register: true});
   }
 
+  attemptLogin = () => {
+    console.log("attempting Login")
+    fetchLoginInfo().then(loginInfo => {
+      this.setLoginState(loginInfo.username, loginInfo.password)
+      this.submitLoginForm()
+    }, () => {})
+  }
+
+  componentWillMount = () => {
+    this.attemptLogin()
+  }
+
 
   render() {
       return (
-        <View>
-        <ImageBackground style={styles.container} source={require('../../Images/street.jpg')}>
-        <View style={styles.overlay}/>
-            <Text style={styles.nalpalHeader} >NalPal</Text>
-            {this.state.register && <Register 
-          onTextFieldChange={this.onTextFieldChange} 
-          username={this.state.username}
-          password={this.state.password}
-          mobile={this.state.mobile}
-          email={this.state.email}
-          submitRegisterForm={this.submitRegisterForm}
-          loginPage={this.loginPage}
-          />}
-          {!this.state.register && <Login 
-          onTextFieldChange={this.onTextFieldChange} 
-          username={this.state.username}
-          password={this.state.password}
-          submitLoginForm={this.submitLoginForm}
-          registerPage={this.registerPage}
-         />}
-        </ImageBackground>
-        </View>
+          <View>
+            <Route render={() => (
+            this.props.loggedIn ? (
+              <Redirect to="/emergency"/>
+              ) : (
+              <ImageBackground style={styles.container} source={require('../../Images/street.jpg')}>
+                <View style={styles.overlay}/>
+                    <Text style={styles.nalpalHeader} >NalPal</Text>
+                    {this.state.register && <Register 
+                  onTextFieldChange={this.onTextFieldChange} 
+                  username={this.state.username}
+                  password={this.state.password}
+                  mobile={this.state.mobile}
+                  email={this.state.email}
+                  submitRegisterForm={this.submitRegisterForm}
+                  loginPage={this.loginPage}
+                  />}
+                  {!this.state.register && <Login 
+                  onTextFieldChange={this.onTextFieldChange} 
+                  username={this.state.username}
+                  password={this.state.password}
+                  submitLoginForm={this.submitLoginForm}
+                  registerPage={this.registerPage}
+                 />}
+              </ImageBackground>
+            ))}/>
+          </View>
+
       ) 
   }
 

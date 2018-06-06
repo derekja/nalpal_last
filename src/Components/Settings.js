@@ -32,6 +32,11 @@ export class Settings extends React.Component<Props, State> {
 	          title="Set Respond Distance"
 	          buttonStyleType = "secondary"
 	        />
+	        <WideButton
+	          title="Log Out"
+	          buttonStyleType = "secondary"
+	          onPress={this.props.logOut}
+	        />
       </View>
     );
   }
