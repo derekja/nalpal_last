@@ -17,7 +17,6 @@ export default class App extends Component {
 
   setLoggedIn = (id) => {
     this.setState({loggedIn: true, id:id})
-    console.log("changing log in state")
   }
 
   setLoggedOut = () => {

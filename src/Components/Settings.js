@@ -8,8 +8,6 @@ import {Header} from "./Navigation/Header"
 
 export class Settings extends React.Component<Props, State> {
 
-  state = {
-  }
 
 
   render() { 

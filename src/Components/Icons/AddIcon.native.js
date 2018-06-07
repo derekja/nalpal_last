@@ -6,8 +6,6 @@ import {colours} from '../UI/colours'
 
 export class AddIcon extends React.Component<Props, State> {
 
-  state = {
-  }
 
   render() { 
     return (

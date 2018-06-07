@@ -3,8 +3,6 @@ import React from 'react'
 import {Modal} from "react-native"
 
 
-type Props = {
-}
 
 export class ModalComponent extends React.Component<Props, State> {
 

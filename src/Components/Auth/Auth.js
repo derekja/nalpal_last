@@ -6,6 +6,8 @@ import {WideButton} from "../UI/WideButton"
 import {colours} from "../UI/colours"
 import { Route, Redirect} from '../../Routing'
 import {storeLoginInfo, fetchLoginInfo} from "../../Helpers/storage"
+import {Login} from "./Login"
+import {Register} from "./Register"
 
 export class Auth extends React.Component<Props, State> {
 
@@ -40,7 +42,6 @@ export class Auth extends React.Component<Props, State> {
   submitLoginForm = () => {
     postLogin(this.state.username, this.state.password).then(
         (response) => {
-          console.log(response)
           if (response.status === "Login Successful") {
               storeLoginInfo(this.state.username, this.state.password)
               this.props.setLoggedIn(response.id)
@@ -58,7 +59,6 @@ export class Auth extends React.Component<Props, State> {
   }
 
   attemptLogin = () => {
-    console.log("attempting Login")
     fetchLoginInfo().then(loginInfo => {
       this.setLoginState(loginInfo.username, loginInfo.password)
       this.submitLoginForm()
@@ -105,76 +105,7 @@ export class Auth extends React.Component<Props, State> {
 
 }
 
-const Login = ({onTextFieldChange, submitLoginForm, registerPage, username, password}) => (
-  <View style={styles.formContainer}>
-        <TextFieldComponent
-          id="username"
-          placeholder="Username"
-          value={username}
-          onChange={onTextFieldChange}
-        />
-        <TextFieldComponent
-          id="password"
-          placeholder="Password"
-          value={password}
-          onChange={onTextFieldChange}
-          password={true}
-        />
-        <WideButton
-          title="Login"
-          buttonStyleType = "secondary"
-          onPress={submitLoginForm}
-        />
-        <TouchableHighlight onPress={registerPage}>
-          <Text>
-            Register
-          </Text>
-        </TouchableHighlight>
-  </View>
-);
-
-const Register = ({onTextFieldChange, submitRegisterForm, loginPage, username, password, email, mobile}) => (
-  <View style={styles.formContainer}>
-        <TextFieldComponent
-          id="username"
-          placeholder="Username"
-          value={username}
-          onChange={onTextFieldChange}
-        />
-        <TextFieldComponent
-          id="password"
-          placeholder="Password"
-          value={password}
-          onChange={onTextFieldChange}
-          password={true}
-        />
-        <TextFieldComponent
-          id="email"
-          placeholder="Email"
-          value={email}
-          onChange={onTextFieldChange}
-        />
-        <TextFieldComponent
-          id="mobile"
-          placeholder="Mobile"
-          value={mobile}
-          onChange={onTextFieldChange}
-        />
-        <WideButton
-          title="Register"
-          buttonStyleType = "secondary"
-          onPress={submitRegisterForm}
-        />
-        <TouchableHighlight onPress={loginPage}>
-          <Text
-          >
-            Login
-          </Text>
-        </TouchableHighlight>
-  </View>
-);
-
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     position: 'relative',
     height: "100%",

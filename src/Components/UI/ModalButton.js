@@ -1,16 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-type Props = {
-  onPress?: Function,
-  title: string,
-}
 
 export class ModalButton extends React.Component<Props, State> {
-
-  state = {
-  }
-
 
   render() { 
     return (

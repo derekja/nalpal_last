@@ -6,26 +6,6 @@ import MapView from 'react-native-maps';
 
  class MapContainer extends React.Component {
 
-  state = {
-    emergencyRequest: {
-    	latitude: 37.78825,
-    	longitude: -122.4324,
-    }
-  }
-
-  onKitRequest = () => {
-    postReportEmergency().then(status => this.updateState(status))
-  }
-
-  updateState = (status) => {
-      this.setState({
-        emergencyRequest: {
-          lat: status.statusCode,
-          message: status.statusDescription
-        }
-      })
-  }
-
   render() {
     const {height, width} = Dimensions.get('window');
   	const markerCoord: LatLng = {

@@ -5,9 +5,6 @@ import {Icon} from 'react-native-elements'
 
 export class CloseIcon extends React.Component<Props, State> {
 
-  state = {
-  }
-
   render() { 
     return (
         <Icon

@@ -4,10 +4,6 @@ import { StyleSheet, TextInput} from 'react-native'
 
 export class MultiLineTextFieldComponent extends React.Component<Props, State> {
 
-  state= {
-
-  }
-
   onChange = (value) => {
   	this.props.onChange(this.props.id, value)
   }

@@ -4,13 +4,6 @@ import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 const googleApiKey = "AIzaSyA7yHY-qcFGvp3PUuPgqTlftPYOknKA270";
 
 
-type Props = {
-  requestLocation ?: {
-    latitude: number,
-    longitude: number
-  }
-
-}
 class MapContainer extends React.Component<Props, State> {
 
 

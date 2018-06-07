@@ -5,8 +5,11 @@ import Checkbox from 'material-ui/Checkbox'
 
 export class CheckboxComponent extends React.Component<Props, State> {
 
-  state= {
-    checked: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      checked: false
+    };
   }
 
   onValueChange = (event, isInputChecked) => {

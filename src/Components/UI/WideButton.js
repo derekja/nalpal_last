@@ -2,17 +2,8 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import {colours} from "./colours"
 
-type Props = {
-  onPress?: Function,
-  title: string,
-  buttonStyleType: "main" | "secondary"
-}
 
 export class WideButton extends React.Component<Props, State> {
-
-  state = {
-  }
-
 
   render() { 
     return (

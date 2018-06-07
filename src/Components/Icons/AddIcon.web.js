@@ -4,9 +4,6 @@ import Add from 'material-ui/svg-icons/content/add'
 
 export class AddIcon extends React.Component<Props, State> {
 
-  state = {
-  }
-
   render() { 
     return (
       <Add/>

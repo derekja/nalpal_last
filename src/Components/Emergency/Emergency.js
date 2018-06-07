@@ -9,10 +9,6 @@ import {EmergencyMainPage} from "./EmergencyMainPage"
 
 export class Emergency extends React.Component<Props, State> {
 
-  state: {
-
-  }
-
   constructor(props) {
     super()
     if (props.triggerResponderRequest) {

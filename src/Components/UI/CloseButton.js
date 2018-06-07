@@ -5,9 +5,6 @@ import {CloseIcon} from "../Icons/CloseIcon"
 
 export class CloseButton extends React.Component<Props, State> {
 
-  state = {
-  }
-
   render() { 
     return (
       <TouchableOpacity

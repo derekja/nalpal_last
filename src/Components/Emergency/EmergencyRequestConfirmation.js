@@ -15,7 +15,7 @@ export class EmergencyRequestConfirmation extends React.Component {
     const requester =  { 
         requestType: this.props.requester.requestType,
         confirmationPending: false,
-        requestLocation: this.props.requester,requestLocation
+        requestLocation: this.props.requester.requestLocation
       };
     this.props.changeState({requester: requester});
   }

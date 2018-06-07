@@ -4,48 +4,33 @@ import {Emergency} from './Emergency/Emergency'
 import {Chat} from './Chat/Chat'
 import {Settings} from './Settings'
 import {Information} from './Information'
-import {NavButtonType} from './Navigation/Nav'
 import {NavWrapper} from './Navigation/NavWrapper'
 import { Route, Redirect} from '../Routing'
 import {getCurrentLocation} from "../Helpers/location"
 import has from 'lodash/has'
 
-type State = {
-  UI: {
-    selectedNavToggle?: NavButtonType
-  },
-  requester: {
-      requestLocation?: {
-          latitude: number,
-          longitude: number
-      }
-  },
-  responder: {
-      accepted: boolean,
-      requestLocation?: {
-        latitude: number,
-        longitude: number
-      }
-  }
-}
 
 export class Main extends React.Component<Props, State> {
 
-  state: State = {
-    id: "afaf0a7135e4a4dfa7389bf77676c967",
-    displayNav: true,
-    userLocation: {
-      latitude: null,
-      longitude: null
-    },
-    requester: {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: "afaf0a7135e4a4dfa7389bf77676c967",
+      displayNav: true,
+      userLocation: {
+        latitude: null,
+        longitude: null
+      },
+      requester: {
 
-    },
-    responder : {
+      },
+      responder : {
 
-    },
-    contacts: [],
-    pendingContacts: []
+      },
+      contacts: [],
+      pendingContacts: []
+
+    };
   }
 
   setResponderState = (responder) => {

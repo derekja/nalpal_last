@@ -1,24 +1,11 @@
-//@flow
 import React from 'react'
 import { Text, StyleSheet, TouchableOpacity} from 'react-native'
-import {NavButtonType} from './Nav'
 import {SettingsIcon, EmergencyIcon, ChatIcon, InformationIcon} from "../Icons/NavIcons"
 import {colours} from "../UI/colours"
 import { Route} from '../../Routing'
 
 
-type Props = {
-  type: NavButtonType,
-  title: string,
-  updateSelectedNavToggle: (NavButtonType) => void,
-  active: boolean,
-  history: any
-}
-
 class NavButton extends React.Component<Props, State> {
-
-  state = {
-  }
 
   onPress = (history) => {
     history.push('/' + this.props.type)

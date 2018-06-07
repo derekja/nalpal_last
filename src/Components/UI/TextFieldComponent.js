@@ -5,10 +5,6 @@ import {colours} from "./colours"
 
 export class TextFieldComponent extends React.Component<Props, State> {
 
-  state= {
-
-  }
-
   onChange = (value) => {
   	this.props.onChange(this.props.id, value)
   }

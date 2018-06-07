@@ -4,8 +4,6 @@ import {Card} from 'material-ui/Card';
 
 export class CardComponent extends React.Component<Props, State> {
 
-  state = {
-  }
 
   render() { 
     return (

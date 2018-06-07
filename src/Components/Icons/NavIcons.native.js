@@ -3,17 +3,8 @@ import React from 'react'
 import {Icon} from 'react-native-elements'
 import {colours} from "../UI/colours"
 
-type Props = {
-  active: boolean
-}
-
-type State = {}
-
 
 export class EmergencyIcon extends React.Component<Props, State> {
-
-  state = {
-  }
 
   render() { 
     return (

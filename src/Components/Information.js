@@ -7,8 +7,6 @@ import {Header} from "./Navigation/Header"
 
 export class Information extends React.Component<Props, State> {
 
-  state = {
-  }
 
 
   render() { 

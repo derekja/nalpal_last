@@ -6,8 +6,6 @@ import {colours} from './colours'
 
 export class AddButton extends React.Component<Props, State> {
 
-  state = {
-  }
 
   render() { 
     return (

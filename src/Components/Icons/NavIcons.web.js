@@ -6,14 +6,7 @@ import Warning from 'material-ui/svg-icons/alert/warning'
 import ChatBubbleOutline from 'material-ui/svg-icons/communication/chat-bubble-outline'
 import {colours} from "../UI/colours"
 
-type Props = {
-  active: boolean
-}
-
 export class ChatIcon extends React.Component<Props, State> {
-
-  state = {
-  }
 
   render() { 
     return (
