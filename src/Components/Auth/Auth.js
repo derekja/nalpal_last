@@ -5,7 +5,7 @@ import {postRegisterUser, postLogin} from "../../Requests/auth"
 import {WideButton} from "../UI/WideButton"
 import {colours} from "../UI/colours"
 import { Route, Redirect} from '../../Routing'
-import {storeItem, fetchItem, storeLoginInfo, fetchLoginInfo} from "../../Helpers/storage"
+import {storeLoginInfo, fetchLoginInfo} from "../../Helpers/storage"
 
 export class Auth extends React.Component<Props, State> {
 

@@ -7,6 +7,7 @@ import {Information} from './Information'
 import {NavButtonType} from './Navigation/Nav'
 import {NavWrapper} from './Navigation/NavWrapper'
 import { Route, Redirect} from '../Routing'
+import {getCurrentLocation} from "../Helpers/location"
 import has from 'lodash/has'
 
 type State = {
@@ -34,8 +35,8 @@ export class Main extends React.Component<Props, State> {
     id: "afaf0a7135e4a4dfa7389bf77676c967",
     displayNav: true,
     userLocation: {
-      latitude: 48.427325,
-      longitude: -123.356122
+      latitude: null,
+      longitude: null
     },
     requester: {
 
@@ -57,6 +58,17 @@ export class Main extends React.Component<Props, State> {
   changeState = (changedStateObjects) => {
       let newState = Object.assign(this.state, changedStateObjects)
       this.setState(newState)
+  }
+
+  getLocation = (onSuccess) => {
+    getCurrentLocation(onSuccess, this.locationFail)
+  }
+
+  locationFail = () => {
+
+  }
+
+  componentWillMount = () => {
   }
 
 
@@ -82,12 +94,12 @@ export class Main extends React.Component<Props, State> {
               <MainRouting
                   requester={this.state.requester}
                   responder={this.state.responder}
-                  userLocation={this.state.userLocation}
                   changeState = {this.changeState}
                   id={this.state.id}
                   contacts={this.state.contacts}
                   pendingContacts={this.state.pendingContacts}
                   logOut={this.props.logOut}
+                  getLocation={this.getLocation}
               />
             </View>
           </NavWrapper>

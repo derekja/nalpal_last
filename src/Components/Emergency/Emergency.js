@@ -35,11 +35,6 @@ export class Emergency extends React.Component<Props, State> {
 
   render() {
 
-    let requestLocation= {
-      latitude: 48.428394,
-      longitude: -123.349839
-    }
-
     let page = {}
 
     if (this.props.requester.requestLocation) {
@@ -47,7 +42,7 @@ export class Emergency extends React.Component<Props, State> {
         page = <EmergencyRequestConfirmation 
                 requester={this.props.requester}
                 changeState={this.props.changeState}
-                requestLocation={requestLocation}
+                requestLocation={this.props.requester.requestLocation}
                 isVisible={this.props.requester.confirmationPending}/>
       } else {
           page = <EmergencyRequest
@@ -68,7 +63,7 @@ export class Emergency extends React.Component<Props, State> {
                     requestLocation={this.props.responder.requestLocation}/>
         }
     } else {
-      page = <EmergencyMainPage changeState= {this.props.changeState} />
+      page = <EmergencyMainPage getLocation={this.props.getLocation} changeState= {this.props.changeState} />
     }
 
     return (
