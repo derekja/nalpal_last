@@ -5,8 +5,12 @@ import {MultiLineTextFieldComponent} from "../UI/MultiLineTextFieldComponent"
 
 export class ComposeMessage extends React.Component<Props, State> {
   
-  state={
-    message: ""
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: ""
+
+    };
   }
 
   onMessageChange = (id, text) => {

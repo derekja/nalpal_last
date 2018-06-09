@@ -2,11 +2,12 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import {Emergency} from './Emergency/Emergency'
 import {Chat} from './Chat/Chat'
-import {Settings} from './Settings'
+import {Settings} from './Settings/Settings'
 import {Information} from './Information'
 import {NavWrapper} from './Navigation/NavWrapper'
 import { Route, Redirect} from '../Routing'
 import {getCurrentLocation} from "../Helpers/location"
+import {Welcome} from './Settings/Welcome'
 import has from 'lodash/has'
 
 
@@ -21,6 +22,7 @@ export class Main extends React.Component<Props, State> {
         latitude: null,
         longitude: null
       },
+      defaultMessage: null,
       requester: {
 
       },
@@ -53,43 +55,43 @@ export class Main extends React.Component<Props, State> {
 
   }
 
-  componentWillMount = () => {
-  }
-
-
   render() {
     let emergencyInProgress = false
     if (has(this.state.requester, 'requestLocation') || has(this.state.responder, 'requestLocation')) {
       emergencyInProgress = true
-      console.log("yes")
     }
 
     return (
       <View style={styles.contentContainer}>
-      <Route render={() => (
-        !this.props.loggedIn ? (
-          <Redirect to="/auth"/>
-          ) : (
-          <NavWrapper
-          emergencyInProgress={emergencyInProgress} 
-          displayNav={this.state.displayNav}
-          {...this.props}
-          >
-            <View style={styles.contentContainer}>
-              <MainRouting
-                  requester={this.state.requester}
-                  responder={this.state.responder}
-                  changeState = {this.changeState}
-                  id={this.state.id}
-                  contacts={this.state.contacts}
-                  pendingContacts={this.state.pendingContacts}
-                  logOut={this.props.logOut}
-                  getLocation={this.getLocation}
-              />
-            </View>
-          </NavWrapper>
-          )
-      )}/>
+        <Route render={() => (
+          !this.props.loggedIn ? (
+            <Redirect to="/auth"/>
+            ) : (
+              this.props.welcome ? (
+                <Welcome setWelcomeState={this.props.setWelcomeState}/>
+              ) : (
+                <NavWrapper
+                emergencyInProgress={emergencyInProgress} 
+                displayNav={this.state.displayNav}
+                {...this.props}
+                >
+                  <View style={styles.contentContainer}>
+                    <MainRouting
+                        requester={this.state.requester}
+                        responder={this.state.responder}
+                        changeState = {this.changeState}
+                        id={this.state.id}
+                        contacts={this.state.contacts}
+                        pendingContacts={this.state.pendingContacts}
+                        logOut={this.props.logOut}
+                        getLocation={this.getLocation}
+                        defaultMessage={this.state.defaultMessage}
+                    />
+                  </View>
+                </NavWrapper>
+              )
+            )
+        )}/>
       </View>
     );
   }
@@ -100,7 +102,7 @@ const MainRouting = (props) => (
   <View style={styles.contentContainer}>
     <Route path="/chat" render={() => (<Chat  id={props.id} contacts={props.contacts} pendingContacts={props.pendingContacts} changeState={props.changeState}/>)}/>
     <Route path="/information" component={Information} />
-    <Route path="/settings" render={() => (<Settings  logOut={props.logOut} />)} />
+    <Route path="/settings" render={() => (<Settings  defaultMessage={props.defaultMessage} logOut={props.logOut} changeState={props.changeState}/>)} />
     <Route path="/emergency" render={() => (<Emergency  {...props} />)}/>
   </View>
 );

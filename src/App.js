@@ -11,7 +11,8 @@ export default class App extends Component {
     super(props);
     this.state = {
       loggedIn: false,
-      id: null
+      id: null,
+      welcome: false
     };
   }
 
@@ -21,6 +22,10 @@ export default class App extends Component {
 
   setLoggedOut = () => {
     this.setState({loggedIn: false, id:null})
+  }
+
+  setWelcomeState = (welcomeState) => {
+    this.setState({welcome: welcomeState})
   }
 
   logOut = () => {
@@ -34,8 +39,15 @@ export default class App extends Component {
       <Router>
         <Switch>
             <Route exact path="/" render={() => (<Redirect to="/emergency"/>)}/>
-            <Route path="/auth"  render={(props) => (<Auth setLoggedIn={this.setLoggedIn} loggedIn={this.state.loggedIn}/>)} />
-            <Route exact path="/*" render={(props) => (<Main {...props} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)} />
+            <Route path="/auth"  render={(props) => (<Auth 
+                      setWelcomeState={this.setWelcomeState} 
+                      setLoggedIn={this.setLoggedIn} 
+                      loggedIn={this.state.loggedIn}/>)} />
+            <Route exact path="/*" render={(props) => (<Main {...props} 
+                      logOut={this.logOut} 
+                      setWelcomeState={this.setWelcomeState} 
+                      welcome={this.state.welcome}
+                      loggedIn={this.state.loggedIn}/>)} />
         </Switch>
     </Router>
     )

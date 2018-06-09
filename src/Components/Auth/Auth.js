@@ -1,8 +1,6 @@
 import React from 'react'
-import { View, StyleSheet, Text, ImageBackground,TouchableHighlight} from 'react-native'
-import {TextFieldComponent} from '../UI/TextFieldComponent'
+import { View, StyleSheet, Text, ImageBackground} from 'react-native'
 import {postRegisterUser, postLogin} from "../../Requests/auth"
-import {WideButton} from "../UI/WideButton"
 import {colours} from "../UI/colours"
 import { Route, Redirect} from '../../Routing'
 import {storeLoginInfo, fetchLoginInfo} from "../../Helpers/storage"
@@ -34,6 +32,7 @@ export class Auth extends React.Component<Props, State> {
     postRegisterUser(this.state.username, this.state.email, this.state.mobile, this.state.password).then(
         (response) => {
           storeLoginInfo(this.state.username, this.state.password)
+          this.props.setWelcomeState(true)
           this.props.setLoggedIn(response.id)
         }
       )

@@ -37,7 +37,7 @@ export async function clearLoginInfo() {
 	}
 }
 
-export async function fetchDefaultMesssage() {
+export async function fetchDefaultMessage() {
 	try {
 	  	const defaultMessage = localStorage.getItem('defaultMessage')
 	    if (defaultMessage !== null){

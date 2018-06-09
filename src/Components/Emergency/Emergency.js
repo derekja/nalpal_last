@@ -37,6 +37,7 @@ export class Emergency extends React.Component<Props, State> {
       if (this.props.requester.confirmationPending) {
         page = <EmergencyRequestConfirmation 
                 requester={this.props.requester}
+                defaultMessage={this.props.defaultMessage}
                 changeState={this.props.changeState}
                 requestLocation={this.props.requester.requestLocation}
                 isVisible={this.props.requester.confirmationPending}/>

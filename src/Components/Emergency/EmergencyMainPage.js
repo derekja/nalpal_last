@@ -8,7 +8,6 @@ export class EmergencyMainPage extends React.Component<Props, State> {
 
   openGlobalConfirmationScreen = () => {
       this.props.getLocation((position) => {
-        console.log(position)
           const requester = { 
             requestType: "GLOBAL_REQUEST",
             confirmationPending: true,
@@ -20,7 +19,6 @@ export class EmergencyMainPage extends React.Component<Props, State> {
   
   openContactConfirmationScreen = () => {
       this.props.getLocation((position) => {
-          console.log(position)
           const requester = { 
             requestType: "CONTACT_REQUEST",
             confirmationPending: true,
