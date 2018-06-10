@@ -86,6 +86,7 @@ export class Main extends React.Component<Props, State> {
                         logOut={this.props.logOut}
                         getLocation={this.getLocation}
                         defaultMessage={this.state.defaultMessage}
+                        setGlobalError={this.props.setGlobalError}
                     />
                   </View>
                 </NavWrapper>
@@ -100,7 +101,11 @@ export class Main extends React.Component<Props, State> {
 
 const MainRouting = (props) => (
   <View style={styles.contentContainer}>
-    <Route path="/chat" render={() => (<Chat  id={props.id} contacts={props.contacts} pendingContacts={props.pendingContacts} changeState={props.changeState}/>)}/>
+    <Route path="/chat" render={() => (<Chat  
+                  id={props.id} contacts={props.contacts} 
+                  pendingContacts={props.pendingContacts} 
+                  setGlobalError={props.setGlobalError}
+                  changeState={props.changeState}/>)}/>
     <Route path="/information" component={Information} />
     <Route path="/settings" render={() => (<Settings  defaultMessage={props.defaultMessage} logOut={props.logOut} changeState={props.changeState}/>)} />
     <Route path="/emergency" render={() => (<Emergency  {...props} />)}/>

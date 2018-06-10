@@ -42,8 +42,12 @@ export class Chat extends React.Component<Props, State> {
 
   fetchContacts = () => {
     getFriends(this.props.id).then(
-      value => { this.props.changeState({contacts: value.data})}
-      )
+      (value) => { 
+        this.props.changeState({contacts: value.data})
+      },
+      (error) => {
+          this.props.setGlobalError("Error fetching contacts")
+      })
   }
 
   addFriend = (contactUsername) => {
@@ -52,7 +56,7 @@ export class Chat extends React.Component<Props, State> {
         this.setState({contactState: {addContactSuccess: true}})
       },
       (error) => {
-        this.setState({contactState: {errorMessage: error.message}})
+        this.props.setGlobalError(error.message)
       })
   }
 
@@ -60,8 +64,11 @@ export class Chat extends React.Component<Props, State> {
     getPendingRequests(this.props.id).then(
         (value) => {
           this.props.changeState({pendingContacts: value.data})
+        },
+        (error) => {
+          this.props.setGlobalError("Error fetching contact requests")
         }
-      )
+    )
   }
 
   verifyFriendRequest = (friendId) => {
@@ -69,6 +76,9 @@ export class Chat extends React.Component<Props, State> {
         (value) => {
             this.fetchPendingRequests()
             this.fetchContacts()
+        },
+        (error) => {
+          this.props.setGlobalError("Something went wrong")
         }
       )
   }

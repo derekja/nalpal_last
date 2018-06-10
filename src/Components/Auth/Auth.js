@@ -12,9 +12,7 @@ export class Auth extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      register: true,
-      loginError: null,
-      registerError: null
+      register: true
     };
   }
 
@@ -26,7 +24,7 @@ export class Auth extends React.Component<Props, State> {
           this.props.setLoggedIn(response.id)
         },
         (error) => {
-            this.setState({registerError: error.message})
+            this.props.setGlobalError(error.message)
         }
       )
   }
@@ -38,12 +36,12 @@ export class Auth extends React.Component<Props, State> {
               storeLoginInfo(username, password)
               this.props.setLoggedIn(response.id)
           } else {
-              this.setState({loginError: "Something went wrong"})
+              this.props.setGlobalError("Something went wrong")
           }
         },
         (error) => {
           if (!autoAttempt) {
-            this.setState({loginError: error.message})
+            this.props.setGlobalError(error.message)
           }
         }
       )
@@ -81,12 +79,10 @@ export class Auth extends React.Component<Props, State> {
                     {this.state.register && <Register 
                           submitRegisterForm={this.submitRegisterForm}
                           loginPage={this.loginPage}
-                          registerError={this.state.registerError}
                   />}
                   {!this.state.register && <Login 
                   submitLoginForm={this.submitLoginForm}
                   registerPage={this.registerPage}
-                  loginError={this.state.loginError}
                  />}
               </View>
             ))}/>

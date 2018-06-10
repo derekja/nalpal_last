@@ -3,6 +3,8 @@ import {Main} from './Components/Main'
 import { Router, Switch, Route, Redirect} from './Routing'
 import {Auth} from './Components/Auth/Auth'
 import {clearLoginInfo} from "./Helpers/storage"
+import {ThemeWrapper} from "./Components/ThemeWrapper"
+import {ErrorBanner} from "./Components/UI/ErrorBanner"
 
 export default class App extends Component {
 
@@ -12,7 +14,8 @@ export default class App extends Component {
     this.state = {
       loggedIn: false,
       id: null,
-      welcome: false
+      welcome: false,
+      globalError: null
     };
   }
 
@@ -28,6 +31,10 @@ export default class App extends Component {
     this.setState({welcome: welcomeState})
   }
 
+  setGlobalError = (error) => {
+    this.setState({globalError: error})
+  }
+
   logOut = () => {
     clearLoginInfo().then(() => {
       this.setLoggedOut()
@@ -38,16 +45,23 @@ export default class App extends Component {
     return (
       <Router>
         <Switch>
+          <ThemeWrapper>
+            {this.state.globalError && <ErrorBanner 
+                    errorText={this.state.globalError} 
+                    setGlobalError={this.setGlobalError}/>}
             <Route exact path="/" render={() => (<Redirect to="/emergency"/>)}/>
             <Route path="/auth"  render={(props) => (<Auth 
-                      setWelcomeState={this.setWelcomeState} 
+                      setWelcomeState={this.setWelcomeState}
+                      setGlobalError={this.setGlobalError} 
                       setLoggedIn={this.setLoggedIn} 
                       loggedIn={this.state.loggedIn}/>)} />
             <Route exact path="/*" render={(props) => (<Main {...props} 
                       logOut={this.logOut} 
+                      setGlobalError={this.setGlobalError}
                       setWelcomeState={this.setWelcomeState} 
                       welcome={this.state.welcome}
                       loggedIn={this.state.loggedIn}/>)} />
+          </ThemeWrapper>
         </Switch>
     </Router>
     )

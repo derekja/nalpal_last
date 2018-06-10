@@ -17,9 +17,9 @@ export async function postAddFriend(username: string, email: string, mobile: str
     }),
   });
     let responseJson = await response.json();
-    if (!responseJson.ok) {
+    if (!response.ok) {
       throw new Error(responseJson.message)
-    }
+    } 
     return responseJson;
   } catch (error) {
     throw new Error(error.message);
@@ -41,9 +41,12 @@ export async function postVerifyFriendRequest(requesterID, responderID):Promise<
       }),
     });
     let responseJson = await response.json();
+    if (!response.ok) {
+      throw new Error(responseJson.message)
+    } 
     return responseJson;
   } catch (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 }
 
@@ -58,9 +61,12 @@ export async function getFriends(id: string):Promise<any> {
     }
   });
     let responseJson = await response.json();
+    if (!response.ok) {
+      throw new Error(responseJson.message)
+    } 
     return responseJson;
   } catch (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 }
 
@@ -76,8 +82,11 @@ export async function getPendingRequests(id: string):Promise<any> {
     }
   });
     let responseJson = await response.json();
+    if (!response.ok) {
+      throw new Error(responseJson.message)
+    } 
     return responseJson;
   } catch (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 }

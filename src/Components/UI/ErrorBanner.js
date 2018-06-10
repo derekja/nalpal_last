@@ -1,35 +1,38 @@
 import React from 'react'
-import {View, StyleSheet, TouchableHighlight} from "react-native"
-import {AddIcon} from "../Icons/AddIcon"
+import {View, StyleSheet, Text} from "react-native"
 import {colours} from './colours'
+import {CloseButton} from "./CloseButton"
 
 
 export class ErrorBanner extends React.Component<Props, State> {
 
-
+  clearErrorText = () => {
+    this.props.setGlobalError(null)
+  }
   render() { 
     return (
-      <TouchableHighlight 
-        style={styles.containerStyle}
-        onPress={this.props.onPress}
-      >
-      <View>
-        <AddIcon/>
+      <View style={styles.bannerContainer}>
+        <CloseButton onPress={this.clearErrorText}/>
+        <Text style={styles.errorText}>{this.props.errorText}</Text>
       </View>
-      </TouchableHighlight>
     );
   }
 
 }
 
 const styles = StyleSheet.create({
-  containerStyle: {
+  bannerContainer: {
+    backgroundColor: "red",
+    width: "100%",
     position: "absolute",
-    bottom: 0,
+    top: 0,
+    left: 0,
     right: 0,
-    backgroundColor: colours.primary,
-    borderRadius: 100,
-    padding: 5,
-    margin: 10
+    zIndex: 100,
+    padding: 20
   },
+  errorText: {
+    color: "#ffffff",
+    fontWeight: "bold",
+  }
 });

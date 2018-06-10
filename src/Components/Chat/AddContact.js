@@ -40,8 +40,7 @@ export class AddContact extends React.Component<Props, State> {
             title="Send Contact Request"
             buttonStyleType = "secondary"
             onPress={this.sendContactRequest}
-          />  
-          {this.props.contactState.errorMessage && <Text>{this.props.contactState.errorMessage}</Text>}
+          /> 
         </View>}
         {this.props.contactState.addContactSuccess && <View style={styles.addContactContainer}>
           <Text> Friend request sent</Text>

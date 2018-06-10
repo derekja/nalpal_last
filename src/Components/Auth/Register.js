@@ -54,7 +54,6 @@ export class Register extends React.Component<Props, State> {
   render() { 
     return (
       <View style={styles.formContainer}>
-              {this.props.registerError && <Text> {this.props.registerError} </Text>}
             <TextFieldComponent
               id="username"
               placeholder="Username"

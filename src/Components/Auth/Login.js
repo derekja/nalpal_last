@@ -43,7 +43,6 @@ export class Login extends React.Component<Props, State> {
   render() { 
     return (
       <View style={styles.formContainer}>
-        {this.props.loginError && <Text> {this.props.loginError} </Text>}
         <TextFieldComponent
           id="username"
           placeholder="Username"

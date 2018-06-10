@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Nav} from './Nav'
 
 export class NavWrapper extends React.Component<Props, State> {
@@ -8,7 +7,6 @@ export class NavWrapper extends React.Component<Props, State> {
   render() {
 
     return (
-      <MuiThemeProvider>
         <View style={styles.flexContainer}>
           <View style={this.props.displayNav? styles.contentContainerWithNav : styles.contentContainerNoNav}>
             {this.props.children}
@@ -17,7 +15,6 @@ export class NavWrapper extends React.Component<Props, State> {
             <Nav {...this.props}/>
           </View>}
         </View>
-      </MuiThemeProvider>
     );
   }
 
