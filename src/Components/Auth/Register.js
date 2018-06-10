@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableHighlight, StyleSheet} from 'react-native'
+import { View, Text, TouchableHighlight} from 'react-native'
 import {TextFieldComponent} from '../UI/TextFieldComponent'
 import {WideButton} from "../UI/WideButton"
 import {styles, ErrorText} from "./Auth"

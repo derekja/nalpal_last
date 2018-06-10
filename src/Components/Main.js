@@ -9,6 +9,7 @@ import { Route, Redirect} from '../Routing'
 import {getCurrentLocation} from "../Helpers/location"
 import {Welcome} from './Settings/Welcome'
 import has from 'lodash/has'
+// import {fetchDistance} from "../Helpers/googleMapsApi"
 
 
 export class Main extends React.Component<Props, State> {
@@ -53,6 +54,18 @@ export class Main extends React.Component<Props, State> {
 
   locationFail = () => {
 
+  }
+
+  componentWillMount = () => {
+    // const origin = {
+    //   latitude: "48.460199", 
+    //   longitude: "-123.350668"
+    // }
+    // const destination = {
+    //   latitude: "48.461579", 
+    //   longitude: "-123.355045"
+    // }
+    // fetchDistance(origin, destination)
   }
 
   render() {

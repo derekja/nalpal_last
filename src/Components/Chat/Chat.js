@@ -8,7 +8,6 @@ import {AddContact} from "./AddContact"
 import {Header} from "../Navigation/Header"
 import {getFriends, postAddFriend, getPendingRequests, postVerifyFriendRequest} from "../../Requests/friends"
 
-
 export class Chat extends React.Component<Props, State> {
 
   constructor(props) {

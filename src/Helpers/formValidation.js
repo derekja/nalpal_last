@@ -14,10 +14,7 @@ export function validateForm(fields: Array) {
 			error = checkPhoneNumberError(field.value)
 		}
 		if (!error && hasRequirement(field.validations, "password")) {
-			console.log("checkingPassword")
 			error = checkPasswordError(field.value)
-			console.log(error)
-			console.log(field.error)
 		}
 		field.error = error
 		if(error) {
@@ -32,12 +29,12 @@ function hasRequirement(validations, requirement) {
 }
 
 function validateEmail(email) {
-	const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 
 function validatePhonenumber(phonenumber) {
-	const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+	const re = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
     return re.test(phonenumber);
 }
 
