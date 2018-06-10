@@ -17,9 +17,15 @@ export async function postRegisterUser(username: string, email: string, mobile: 
     }),
   });
     let responseJson = await response.json();
-    return responseJson;
+    if(response.ok) {
+      return responseJson;
+    } else if (!responseJson.message) {
+      throw new Error("Something went wrong")
+    } else {
+      throw new Error(responseJson.message)
+    }
   } catch (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 }
 
@@ -38,8 +44,14 @@ export async function postLogin(username: string, password: string):Promise<any>
     }),
   });
     let responseJson = await response.json();
-    return responseJson;
+    if(response.ok) {
+      return responseJson;
+    } else if (!responseJson.message) {
+      throw new Error("Something went wrong")
+    } else {
+      throw new Error(responseJson.message)
+    }
   } catch (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 }

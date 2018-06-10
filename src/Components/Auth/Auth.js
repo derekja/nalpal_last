@@ -12,38 +12,38 @@ export class Auth extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      username: null,
-      password: null,
-      email: null,
-      mobile: null,
       register: true,
+      loginError: null,
+      registerError: null
     };
   }
 
-  onTextFieldChange = (id, value) => {
-    this.setState({[id]: value});
-  }
-
-  setLoginState(username, password) {
-    this.setState({username: username, password: password});
-  }
-
-  submitRegisterForm = () => {
-    postRegisterUser(this.state.username, this.state.email, this.state.mobile, this.state.password).then(
+  submitRegisterForm = (username, password, email, mobile) => {
+    postRegisterUser(username, email, mobile, password).then(
         (response) => {
-          storeLoginInfo(this.state.username, this.state.password)
+          storeLoginInfo(username, password)
           this.props.setWelcomeState(true)
           this.props.setLoggedIn(response.id)
+        },
+        (error) => {
+            this.setState({registerError: error.message})
         }
       )
   }
 
-  submitLoginForm = () => {
-    postLogin(this.state.username, this.state.password).then(
+  submitLoginForm = (username, password, autoAttempt = false) => {
+    postLogin(username, password).then(
         (response) => {
           if (response.status === "Login Successful") {
-              storeLoginInfo(this.state.username, this.state.password)
+              storeLoginInfo(username, password)
               this.props.setLoggedIn(response.id)
+          } else {
+              this.setState({loginError: "Something went wrong"})
+          }
+        },
+        (error) => {
+          if (!autoAttempt) {
+            this.setState({loginError: error.message})
           }
         }
       )
@@ -59,8 +59,7 @@ export class Auth extends React.Component<Props, State> {
 
   attemptLogin = () => {
     fetchLoginInfo().then(loginInfo => {
-      this.setLoginState(loginInfo.username, loginInfo.password)
-      this.submitLoginForm()
+      this.submitLoginForm(loginInfo.username, loginInfo.password, true)
     }, () => {})
   }
 
@@ -76,26 +75,20 @@ export class Auth extends React.Component<Props, State> {
             this.props.loggedIn ? (
               <Redirect to="/emergency"/>
               ) : (
-              <ImageBackground style={styles.container} source={require('../../Images/street.jpg')}>
+              <View style={styles.container}>
                 <View style={styles.overlay}/>
                     <Text style={styles.nalpalHeader} >NalPal</Text>
                     {this.state.register && <Register 
-                  onTextFieldChange={this.onTextFieldChange} 
-                  username={this.state.username}
-                  password={this.state.password}
-                  mobile={this.state.mobile}
-                  email={this.state.email}
-                  submitRegisterForm={this.submitRegisterForm}
-                  loginPage={this.loginPage}
+                          submitRegisterForm={this.submitRegisterForm}
+                          loginPage={this.loginPage}
+                          registerError={this.state.registerError}
                   />}
                   {!this.state.register && <Login 
-                  onTextFieldChange={this.onTextFieldChange} 
-                  username={this.state.username}
-                  password={this.state.password}
                   submitLoginForm={this.submitLoginForm}
                   registerPage={this.registerPage}
+                  loginError={this.state.loginError}
                  />}
-              </ImageBackground>
+              </View>
             ))}/>
           </View>
 
@@ -103,6 +96,14 @@ export class Auth extends React.Component<Props, State> {
   }
 
 }
+
+export const ErrorText = ({error}) => (
+  <View style={styles.errorTextContainer}>
+    <Text style={styles.errorText}>
+      *{error}
+    </Text>
+  </View>
+);
 
 export const styles = StyleSheet.create({
   container: {
@@ -128,5 +129,13 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     zIndex: 10,
     marginVertical: 30
+  },
+  errorText: {
+    textAlign: 'left',
+    fontWeight: "bold"
+  },
+  errorTextContainer: {
+    width: '100%',
+    marginLeft: 100
   }
 });

@@ -121,18 +121,6 @@ export class Chat extends React.Component<Props, State> {
   }
 
 }
-
-// const Contact = ({contactName}) => (
-//   <View style={styles.contactWrapper}>
-//     <Text style={styles.contactName}>
-//       {contactName}
-//     </Text>
-//     <View style={styles.iconContainer}>
-//       <MessageIcon/>
-//     </View>
-//   </View>
-// );
-
 const styles = StyleSheet.create({
   chatContainer: {
       flex: 1
