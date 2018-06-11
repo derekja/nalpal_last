@@ -69,10 +69,6 @@ export class Auth extends React.Component<Props, State> {
   render() {
       return (
           <View>
-            <Route render={() => (
-            this.props.loggedIn ? (
-              <Redirect to="/emergency"/>
-              ) : (
               <View style={styles.container}>
                 <View style={styles.overlay}/>
                     <Text style={styles.nalpalHeader} >NalPal</Text>
@@ -85,7 +81,6 @@ export class Auth extends React.Component<Props, State> {
                   registerPage={this.registerPage}
                  />}
               </View>
-            ))}/>
           </View>
 
       ) 

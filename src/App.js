@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {View} from "react-native"
 import {Main} from './Components/Main'
 import { Router, Switch, Route, Redirect} from './Routing'
 import {Auth} from './Components/Auth/Auth'
@@ -43,27 +44,39 @@ export default class App extends Component {
 
   render() { 
     return (
-      <Router>
-        <Switch>
-          <ThemeWrapper>
-            {this.state.globalError && <ErrorBanner 
-                    errorText={this.state.globalError} 
-                    setGlobalError={this.setGlobalError}/>}
-            <Route exact path="/" render={() => (<Redirect to="/emergency"/>)}/>
-            <Route path="/auth"  render={(props) => (<Auth 
-                      setWelcomeState={this.setWelcomeState}
-                      setGlobalError={this.setGlobalError} 
-                      setLoggedIn={this.setLoggedIn} 
-                      loggedIn={this.state.loggedIn}/>)} />
-            <Route exact path="/*" render={(props) => (<Main {...props} 
-                      logOut={this.logOut} 
-                      setGlobalError={this.setGlobalError}
-                      setWelcomeState={this.setWelcomeState} 
-                      welcome={this.state.welcome}
-                      loggedIn={this.state.loggedIn}/>)} />
-          </ThemeWrapper>
-        </Switch>
-    </Router>
+      <ThemeWrapper>
+          <Router>
+            <Switch>
+                {this.state.globalError && <ErrorBanner 
+                        errorText={this.state.globalError} 
+                        setGlobalError={this.setGlobalError}/>}
+                <Route exact path="/" render={() => (<Redirect to="/emergency"/>)}/>
+                <Route path="/auth"  render={ (props) => (
+                          this.state.loggedIn ? (
+                            <Redirect to="/emergency"/>
+                          ) : (<Auth {...props}
+                                setWelcomeState={this.setWelcomeState}
+                                setGlobalError={this.setGlobalError} 
+                                setLoggedIn={this.setLoggedIn} 
+                                loggedIn={this.state.loggedIn}/>
+                          )
+                      )}
+                />
+                <Route exact path="/*"  render={(props) => (
+                          !this.state.loggedIn ? (
+                            <Redirect to="/auth"/>
+                          ) : (<Main {...props}
+                                logOut={this.logOut} 
+                                setGlobalError={this.setGlobalError}
+                                setWelcomeState={this.setWelcomeState} 
+                                welcome={this.state.welcome}
+                                loggedIn={this.state.loggedIn}/>
+                          )
+                      )}
+                />
+            </Switch>
+          </Router>
+      </ThemeWrapper>
     )
   }
 }
