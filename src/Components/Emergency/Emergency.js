@@ -1,30 +1,36 @@
 import React from 'react'
-import {View} from "react-native"
+import {View, StyleSheet} from "react-native"
 import {EmergencyRequest} from './EmergencyRequest'
 import {EmergencyResponse} from './EmergencyResponse'
 import {EmergencyResponseConfirmation} from './EmergencyResponseConfirmation'
 import {EmergencyRequestConfirmation} from './EmergencyRequestConfirmation'
 import {EmergencyMainPage} from "./EmergencyMainPage"
+import {fetchAddress} from "../../Helpers/googleMapsApi"
+import assign from "lodash/assign"
 
 
 export class Emergency extends React.Component<Props, State> {
 
   constructor(props) {
     super()
-    if (props.triggerResponderRequest) {
-      let contact = null
-      if (props.contact) {
-        contact = "Jeff185"
-      }
-      const responder = {
-        requestPending: true,
-        requestLocation: {
-            latitude: 48.428310,
-            longitude: -123.368962
+  }
+
+  fetchAddress = (requestType) => {
+    if (requestType !== "requester" && requestType !== "responder") {
+      return null
+    }
+    let requestObject = this.props[requestType]
+    if (requestObject.requestLocation) {
+      fetchAddress(requestObject.requestLocation).then(
+          (address) => {
+            assign(requestObject, {address: address})
+            this.props.changeState({[requestType]: requestObject})
           },
-        contactName: contact
-      }
-      props.setResponderState(responder);
+          (error) => {
+            assign(requestObject, {address: "address unavailable"})
+            this.props.changeState({[requestType]: requestObject})
+          }
+        )
     }
   }
 
@@ -36,28 +42,30 @@ export class Emergency extends React.Component<Props, State> {
     if (this.props.requester.requestLocation) {
       if (this.props.requester.confirmationPending) {
         page = <EmergencyRequestConfirmation 
+                fetchAddress={this.fetchAddress}
                 requester={this.props.requester}
                 defaultMessage={this.props.defaultMessage}
                 changeState={this.props.changeState}
-                requestLocation={this.props.requester.requestLocation}
                 isVisible={this.props.requester.confirmationPending}/>
       } else {
           page = <EmergencyRequest
+                  fetchAddress={this.fetchAddress}
                   requester={this.props.requester}
+                  defaultMessage={this.props.defaultMessage}
                   changeState={this.props.changeState}/>
       }
     } else if (this.props.responder.requestLocation) {
-        if (this.props.responder.confirmationPending) {
+        if (this.props.responder.requestPending) {
             page = <EmergencyResponseConfirmation
                   changeState={this.props.changeState}
-                  requestLocation={this.props.responder.requestLocation}
                   contactName={this.props.responder.contactName}
                   userLocation={this.props.userLocation}
+                  responder={this.props.responder}
                   isVisible={this.props.responder.requestPending}/>
         } else {
           page = <EmergencyResponse 
                     changeState={this.props.changeState}
-                    requestLocation={this.props.responder.requestLocation}/>
+                    responder={this.props.responder}/>
         }
     } else {
       page = <EmergencyMainPage getLocation={this.props.getLocation} changeState= {this.props.changeState} />
@@ -71,4 +79,19 @@ export class Emergency extends React.Component<Props, State> {
   }
 
 }
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  mapContainer: {
+    flex: 1,
+  }, 
+  buttonContainer: {
+    flexDirection: "row",
+    height: 55,
+  }
+
+});
+
 

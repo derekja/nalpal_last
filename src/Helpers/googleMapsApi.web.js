@@ -11,7 +11,7 @@ export async function fetchDistance(origin, destination):Promise<any> {
 			    travelMode: 'WALKING'
 			},
 			(response, status) => {
-				if (status == 'OK') {
+				if (status === 'OK') {
 					const distance = response.rows[0].elements[0].distance.text;
 				    resolve(distance);
 				}else {
@@ -34,9 +34,14 @@ export async function fetchAddress(location):Promise<any> {
 				location: loc
 			},
 			(response, status) => {
-				if (status == 'OK') {
+				if (status === 'OK') {
 					const addressComponents = response[0].address_components
-					const formattedAddress = addressComponents[0].short_name + " " + addressComponents[1].short_name
+					const formattedAddress = addressComponents[0].short_name + " " + 
+											addressComponents[1].short_name + ", " + 
+											addressComponents[2].short_name + ", " +
+											addressComponents[5].short_name
+
+
 				  	resolve(formattedAddress);
 				}else {
 				  // reject promise otherwise

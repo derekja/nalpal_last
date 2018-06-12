@@ -5,7 +5,7 @@ import {Chat} from './Chat/Chat'
 import {Settings} from './Settings/Settings'
 import {Information} from './Information'
 import {NavWrapper} from './Navigation/NavWrapper'
-import { Route, Redirect} from '../Routing'
+import { Route} from '../Routing'
 import {getCurrentLocation} from "../Helpers/location"
 import {Welcome} from './Settings/Welcome'
 import has from 'lodash/has'
@@ -106,7 +106,7 @@ const MainRouting = (props) => (
                   setGlobalError={props.setGlobalError}
                   changeState={props.changeState}/>)}/>
     <Route path="/information" component={Information} />
-    <Route path="/settings" render={() => (<Settings  defaultMessage={props.defaultMessage} logOut={props.logOut} changeState={props.changeState}/>)} />
+    <Route path="/settings" render={() => (<Settings defaultMessage={props.defaultMessage} logOut={props.logOut} changeState={props.changeState}/>)} />
     <Route path="/emergency" render={() => (<Emergency  {...props} />)}/>
   </View>
 );

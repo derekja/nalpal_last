@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {View} from "react-native"
 import {Main} from './Components/Main'
 import { Router, Switch, Route, Redirect} from './Routing'
 import {Auth} from './Components/Auth/Auth'
@@ -13,7 +12,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: true,
       id: null,
       welcome: false,
       globalError: null

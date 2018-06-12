@@ -1,12 +1,23 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import {EmergencyMessageBox} from './EmergencyMessageBox'
-import {CancelButton} from '../UI/CancelButton'
+import { View } from 'react-native'
+import MapContainer from "../UI/MapContainer"
+import {EmergencyRequestButton} from "./EmergencyRequestButton"
+import {Header} from "../Navigation/Header"
+import {AddressBar} from "./AddressBar"
+import {ResponderProximityNotice} from "./ResponderProximityNotice"
+import {EmergencyMessageBox} from "./EmergencyMessageBox"
+import {styles} from "./Emergency"
 
 export class EmergencyRequest extends React.Component {
 
   cancelRequest = () => {
       this.props.changeState({requester: {}})
+  }
+
+  componentWillMount = () => {
+    if(this.props.requester.address === null) {
+          this.props.fetchAddress("requester")
+      }
   }
 
   render() {
@@ -16,28 +27,20 @@ export class EmergencyRequest extends React.Component {
     ];
 
     return (
-      <View>
-        <CancelButton
-          title="Cancel Emergency"
-          onPress={this.cancelRequest}
-        />
-        <Text style={styles.textBox}>
-          There are currently 2 people who have responded, the closest is 250m away
-        </Text>
-        <EmergencyMessageBox textInput={true} messages={messages}/>
+      <View style={styles.container}>
+        <Header headerTitle="Request for Help Sent"/>
+        <View style={styles.mapContainer}>
+            {this.props.requester.address && <AddressBar address={this.props.requester.address}/>}
+            <MapContainer requestLocation={this.props.requester.requestLocation} />
+            <ResponderProximityNotice/>
+        </View>
+        <EmergencyMessageBox messages={messages}/>
+        <View style={styles.buttonContainer}>
+              <EmergencyRequestButton single={true} title="Cancel the Call" onPress={this.cancelRequest}/>
+        </View>
       </View>
 
     );
   }
 
 }
-
-const styles = StyleSheet.create({
-  textBox: {
-    borderColor: "black",
-    borderWidth: 1,
-    borderStyle: 'solid',
-    padding: 10,
-    maxWidth: 250
-  },
-});

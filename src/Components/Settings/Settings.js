@@ -21,6 +21,17 @@ export class Settings extends React.Component<Props, State> {
 		this.setState({editDefaultMessageScreenOpen: false})
 	}
 
+	createTestRequest = () => {
+		const responder = {
+		  requestPending: true,
+		  requestLocation: {
+		      latitude: 48.428310,
+		      longitude: -123.368962
+		    }
+		}
+		this.props.changeState({responder: responder})
+	}
+
   	render() { 
 	  	if (this.state.editDefaultMessageScreenOpen) {
 	  		return (
@@ -39,10 +50,6 @@ export class Settings extends React.Component<Props, State> {
 	  		          buttonStyleType = "secondary"
 	  		        />
 	  		        <WideButton
-	  		          title="Set Privacy Level"
-	  		          buttonStyleType = "secondary"
-	  		        />
-	  		        <WideButton
 	  		          title="Set Defaults and Emergency Message"
 	  		          buttonStyleType = "secondary"
 	  		          onPress={this.openEditMessage}
@@ -55,6 +62,11 @@ export class Settings extends React.Component<Props, State> {
 	  		          title="Log Out"
 	  		          buttonStyleType = "secondary"
 	  		          onPress={this.props.logOut}
+	  		        />
+	  		        <WideButton
+	  		          title="Trigger responder screen"
+	  		          buttonStyleType = "secondary"
+	  		          onPress={this.createTestRequest}
 	  		        />
 	  	     	</View>
 	  	    );

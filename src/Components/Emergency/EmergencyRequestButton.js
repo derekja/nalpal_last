@@ -7,9 +7,14 @@ export class EmergencyRequestButton extends React.Component<Props, State> {
 
   render() {
 
+    let buttonStyle = [styles.button]
+    if (this.props.single) {
+      buttonStyle = [styles.button, styles.singleButton]
+    }
+
       return (
            <TouchableOpacity
-            style={this.props.confirm? [styles.button, styles.buttonConfirm] : [styles.button, styles.buttonCancel]}
+            style={this.props.confirm? [buttonStyle, styles.buttonConfirm] : [buttonStyle, styles.buttonCancel]}
             onPress={this.props.onPress}
           >
               <Text style={this.props.confirm? [styles.text, styles.textConfirm] : [styles.text, styles.textCancel]}>
@@ -21,12 +26,16 @@ export class EmergencyRequestButton extends React.Component<Props, State> {
 
 }
 
+
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#ffffff",
-    width: "50%",
+    flexBasis: "50%",
     justifyContent: "center",
     paddingHorizontal: 20
+  },
+  singleButton: {
+    flexBasis: "100%"
   },
   buttonConfirm: {
     backgroundColor: colours.emergency,

@@ -11,7 +11,8 @@ export class EmergencyMainPage extends React.Component<Props, State> {
           const requester = { 
             requestType: "GLOBAL_REQUEST",
             confirmationPending: true,
-            requestLocation: position
+            requestLocation: position,
+            address: null
           };
           this.props.changeState({requester: requester})
       })
@@ -22,7 +23,8 @@ export class EmergencyMainPage extends React.Component<Props, State> {
           const requester = { 
             requestType: "CONTACT_REQUEST",
             confirmationPending: true,
-            requestLocation: position
+            requestLocation: position,
+            address: null
           };
           this.props.changeState({requester: requester})
       })

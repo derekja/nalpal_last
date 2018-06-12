@@ -1,8 +1,11 @@
 import React  from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 import MapContainer from '../UI/MapContainer'
 import {EmergencyMessageBox} from './EmergencyMessageBox'
-import {CancelButton} from '../UI/CancelButton'
+import {styles} from "./Emergency"
+import {EmergencyRequestButton} from "./EmergencyRequestButton"
+import {Header} from "../Navigation/Header"
+import {AddressBar} from "./AddressBar"
 
 export class EmergencyResponse extends React.Component<Props, State> {
 
@@ -17,34 +20,18 @@ export class EmergencyResponse extends React.Component<Props, State> {
     ];
 
       return (
-        <View>
-          <CancelButton
-            title="Cancel Response"
-            onPress={this.cancelResponse}
-          />
-            <Text style={styles.textBox}>
-              There is currently 1 other person who has also responded, you are closest at 250m away, the next closest is 550m away
-            </Text>
+        <View style={styles.container}>
+          <Header headerTitle="Responding to Request"/>
           <View style={styles.mapContainer}>
-            <MapContainer requestLocation={this.props.requestLocation}/>
+              {this.props.responder.address && <AddressBar address={this.props.responder.address}/>}
+              <MapContainer requestLocation={this.props.responder.requestLocation} />
           </View>
-          <EmergencyMessageBox textInput={true} messages={messages}/>
+          <EmergencyMessageBox messages={messages}/>
+          <View style={styles.buttonContainer}>
+                <EmergencyRequestButton single={true} title="Cancel the Response" onPress={this.cancelResponse}/>
+          </View>
         </View>
     );
   }
 
 }
-
-const styles = StyleSheet.create({
-  textBox: {
-    borderColor: "black",
-    borderWidth: 1,
-    borderStyle: 'solid',
-    padding: 10,
-    maxWidth: 250
-  },
-  mapContainer: {
-    height: 200,
-    marginVertical: 10
-  },
-});

@@ -1,9 +1,13 @@
 import React from 'react'
-import { View, StyleSheet} from 'react-native'
+import { View} from 'react-native'
 import MapContainer from "../UI/MapContainer"
 import {ConfirmationMessageBox} from "./ConfirmationMessageBox"
 import {EmergencyRequestButton} from "./EmergencyRequestButton"
 import {fetchDefaultMessage} from "../../Helpers/storage"
+import {styles} from "./Emergency"
+import {AddressBar} from "./AddressBar"
+import assign from "lodash/assign"
+import {Header} from "../Navigation/Header"
 
 
 export class EmergencyRequestConfirmation extends React.Component {
@@ -13,11 +17,8 @@ export class EmergencyRequestConfirmation extends React.Component {
   }
 
   sendEmergencyRequest = () => {
-    const requester =  { 
-        requestType: this.props.requester.requestType,
-        confirmationPending: false,
-        requestLocation: this.props.requester.requestLocation
-      };
+    let requester = this.props.requester
+    assign(requester, {confirmationPending: false})
     this.props.changeState({requester: requester});
   }
 
@@ -29,14 +30,19 @@ export class EmergencyRequestConfirmation extends React.Component {
             }
           )
       }
+      if(this.props.requester.address === null) {
+          this.props.fetchAddress("requester")
+      }
   }
 
   render() {
     const defaultMessage = "Thank you for helping me, I am in room 253, the code to the building is 8819, my door is unlocked"
     return (
       <View style={styles.container}>
+        <Header headerTitle="Confirm Call for a Kit"/>
         <View style={styles.mapContainer}>
-            <MapContainer requestLocation={this.props.requestLocation} />
+            {this.props.requester.address && <AddressBar address={this.props.requester.address}/>}
+            <MapContainer requestLocation={this.props.requester.requestLocation} />
             <ConfirmationMessageBox userMessage={true} message={this.props.defaultMessage}/>
         </View>
         <View style={styles.buttonContainer}>
@@ -48,16 +54,3 @@ export class EmergencyRequestConfirmation extends React.Component {
 
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  mapContainer: {
-    flex: 1,
-  }, 
-  buttonContainer: {
-    flexDirection: "row",
-    height: 55
-  }
-});

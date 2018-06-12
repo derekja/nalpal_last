@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TextInput, ScrollView} from 'react-native'
 
 
 
@@ -9,18 +9,17 @@ export class EmergencyMessageBox extends React.Component<Props, State> {
 
   render() {
 
-    let messages = this.props.messages.map((message) =>
-    <Message text={message.text} sentByUser={message.senderId === 1}/>
+    let messages = this.props.messages.map((message, i) =>
+    <Message text={message.text} sentByUser={message.senderId === 1} key={i}/>
     );
     return (
       <View>
-        <View style={styles.messageBox}>
+        <ScrollView style={styles.messageBox}>
           {messages}
-        </View>
-          {this.props.textInput && <TextInput
-            style={{borderColor: 'black', borderWidth: 1}}
-            value={"Enter Message"}
-          />}
+        </ScrollView>
+          <TextInput
+             value={"Send Message"}
+          />
       </View>
 
     );
@@ -38,15 +37,13 @@ const Message = ({text, sentByUser}) => (
 
 const styles = StyleSheet.create({
   messageBox: {
-    borderColor: 'black',
-    borderWidth: 1,
-    borderStyle: 'solid',
     padding: 10,
+    height: 100
   },
   userMessage: {
     backgroundColor: 'lightgrey',
     padding: 5,
-    maxWidth: 200,
+    maxWidth: '80%',
   },
   messageWrapper: {
     paddingBottom: 5,

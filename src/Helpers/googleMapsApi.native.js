@@ -50,9 +50,12 @@ export async function fetchAddress(location){
     if (!response.ok) {
       throw new Error(responseJson.message)
     } 
-    console
     const addressComponents = responseJson.results[0].address_components
-    const formattedAddress = addressComponents[0].short_name + " " + addressComponents[1].short_name
+    const formattedAddress = addressComponents[0].short_name + " " + 
+							addressComponents[1].short_name + ", " + 
+							addressComponents[2].short_name + ", " +
+							addressComponents[5].short_name
+	return(formattedAddress)
   } catch (error) {
     throw new Error(error.message);
   }

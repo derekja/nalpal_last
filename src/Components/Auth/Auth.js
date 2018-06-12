@@ -2,7 +2,6 @@ import React from 'react'
 import { View, StyleSheet, Text} from 'react-native'
 import {postRegisterUser, postLogin} from "../../Requests/auth"
 import {colours} from "../UI/colours"
-import { Route, Redirect} from '../../Routing'
 import {storeLoginInfo, fetchLoginInfo} from "../../Helpers/storage"
 import {Login} from "./Login"
 import {Register} from "./Register"

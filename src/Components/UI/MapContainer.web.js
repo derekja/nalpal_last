@@ -1,7 +1,5 @@
 import React from 'react'
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
-
-const googleApiKey = "AIzaSyA7yHY-qcFGvp3PUuPgqTlftPYOknKA270";
+import {Map, Marker} from 'google-maps-react';
 
 
 class MapContainer extends React.Component<Props, State> {
@@ -10,7 +8,7 @@ class MapContainer extends React.Component<Props, State> {
   render() {
     var iconURL = require('../../Images/myLocation.web.png')
     return (
-      <Map google={this.props.google} zoom={14}
+      <Map google={window.google} zoom={14}
         style={style}
         initialCenter={{
             lat: this.props.requestLocation.latitude,
@@ -38,6 +36,4 @@ const style = {
   width: "100%"
 }
 
-export default GoogleApiWrapper({
-  apiKey: googleApiKey
-})(MapContainer)
+export default MapContainer
