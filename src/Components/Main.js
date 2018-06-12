@@ -81,7 +81,7 @@ export class Main extends React.Component<Props, State> {
                         requester={this.state.requester}
                         responder={this.state.responder}
                         changeState = {this.changeState}
-                        id={this.state.id}
+                        id={this.props.id}
                         contacts={this.state.contacts}
                         pendingContacts={this.state.pendingContacts}
                         logOut={this.props.logOut}

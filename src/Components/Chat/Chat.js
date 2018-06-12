@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import {TabComponent} from "../UI/TabComponent"
-import {ContactsContainer} from "./ContactsContainer"
+import ContactsContainer from "./ContactsContainer"
 import {MessagesContainer} from "./MessagesContainer"
 import {ComposeMessage} from "./ComposeMessage"
 import {AddContact} from "./AddContact"
@@ -14,6 +14,8 @@ export class Chat extends React.Component<Props, State> {
     super(props);
     this.state = {
       selectedTabIndex: 0,
+      contactsLoading: false,
+      pendingRequestLoading: false,
       actionScreenOpen: null,
       contactState: {
       }
@@ -43,9 +45,11 @@ export class Chat extends React.Component<Props, State> {
     getFriends(this.props.id).then(
       (value) => { 
         this.props.changeState({contacts: value.data})
+        this.setState({contactsLoading: false})
       },
       (error) => {
           this.props.setGlobalError("Error fetching contacts")
+          this.setState({contactsLoading: false})
       })
   }
 
@@ -63,9 +67,11 @@ export class Chat extends React.Component<Props, State> {
     getPendingRequests(this.props.id).then(
         (value) => {
           this.props.changeState({pendingContacts: value.data})
+          this.setState({pendingRequestLoading: false})
         },
         (error) => {
           this.props.setGlobalError("Error fetching contact requests")
+          this.setState({pendingRequestLoading: false})
         }
     )
   }
@@ -73,6 +79,7 @@ export class Chat extends React.Component<Props, State> {
   verifyFriendRequest = (friendId) => {
       postVerifyFriendRequest(friendId, this.props.id).then(
         (value) => {
+            this.setState({contactsLoading: true, pendingRequestLoading: true})
             this.fetchPendingRequests()
             this.fetchContacts()
         },
@@ -84,6 +91,7 @@ export class Chat extends React.Component<Props, State> {
 
 
   componentWillMount() {
+    this.setState({contactsLoading: true, pendingRequestLoading: true})
     this.fetchPendingRequests()
     this.fetchContacts()
   }
@@ -116,7 +124,8 @@ export class Chat extends React.Component<Props, State> {
           <TabComponent handleTabChange= {this.handleTabChange} selectedTabIndex={this.state.selectedTabIndex} tabs={tabs}/>
           <View style={styles.chatContainer}>
             {this.state.selectedTabIndex === 0 && <ContactsContainer 
-                                                          contacts={this.props.contacts} 
+                                                          contacts={this.props.contacts}
+                                                          loading={this.state.contactsLoading || this.state.pendingRequestsLoading}
                                                           verifyFriendRequest={this.verifyFriendRequest}
                                                           pendingContacts={this.props.pendingContacts}
                                                           openAddContact={this.openAddContact} />}

@@ -69,6 +69,7 @@ export default class App extends Component {
                                 setGlobalError={this.setGlobalError}
                                 setWelcomeState={this.setWelcomeState} 
                                 welcome={this.state.welcome}
+                                id={this.state.id}
                                 loggedIn={this.state.loggedIn}/>
                           )
                       )}

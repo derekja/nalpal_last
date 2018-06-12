@@ -5,8 +5,9 @@ import {WideButton} from "../UI/Buttons/WideButton"
 import {styles, ErrorText} from "./Auth"
 import assign from "lodash/assign"
 import {validateForm} from "../../Helpers/formValidation"
+import withLoadingScreen from "../UI/Loading"
 
-export class Login extends React.Component<Props, State> {
+class Login extends React.Component<Props, State> {
 
   constructor(props) {
     super(props);
@@ -42,32 +43,39 @@ export class Login extends React.Component<Props, State> {
 
   render() { 
     return (
-      <View style={styles.formContainer}>
-        <TextFieldComponent
-          id="username"
-          placeholder="Username"
-          value={this.state.username.value}
-          onChange={this.onTextFieldChange}
-        />
-        {this.state.username.error && <ErrorText error={this.state.username.error}/>}
-        <TextFieldComponent
-          id="password"
-          placeholder="Password"
-          value={this.state.password.value}
-          onChange={this.onTextFieldChange}
-          password={true}
-        />
-        {this.state.password.error && <ErrorText error={this.state.password.error}/>}
-        <WideButton
-          title="Login"
-          buttonStyleType = "secondary"
-          onPress={this.submitLoginForm}
-        />
-        <TouchableHighlight onPress={this.props.registerPage}>
-          <Text>
-            Register
-          </Text>
-        </TouchableHighlight>
-  </View>);
+      <View style={styles.container}>
+          <View style={styles.overlay}/>
+          <Text style={styles.nalpalHeader} >NalPal</Text>
+          <View style={styles.formContainer}>
+            <TextFieldComponent
+              id="username"
+              placeholder="Username"
+              value={this.state.username.value}
+              onChange={this.onTextFieldChange}
+            />
+            {this.state.username.error && <ErrorText error={this.state.username.error}/>}
+            <TextFieldComponent
+              id="password"
+              placeholder="Password"
+              value={this.state.password.value}
+              onChange={this.onTextFieldChange}
+              password={true}
+            />
+            {this.state.password.error && <ErrorText error={this.state.password.error}/>}
+            <WideButton
+              title="Login"
+              buttonStyleType = "secondary"
+              onPress={this.submitLoginForm}
+            />
+            <TouchableHighlight onPress={this.props.registerPage}>
+              <Text>
+                Register
+              </Text>
+            </TouchableHighlight>
+          </View>
+      </View>
+    );
   }
 }
+
+export default withLoadingScreen(Login);

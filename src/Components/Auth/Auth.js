@@ -3,15 +3,16 @@ import { View, StyleSheet, Text} from 'react-native'
 import {postRegisterUser, postLogin} from "../../Requests/auth"
 import {colours} from "../UI/colours"
 import {storeLoginInfo, fetchLoginInfo} from "../../Helpers/storage"
-import {Login} from "./Login"
-import {Register} from "./Register"
+import Login from "./Login"
+import Register from "./Register"
 
 export class Auth extends React.Component<Props, State> {
 
   constructor(props) {
     super(props);
     this.state = {
-      register: true
+      register: true,
+      loading: false
     };
   }
 
@@ -33,6 +34,7 @@ export class Auth extends React.Component<Props, State> {
         (response) => {
           if (response.status === "Login Successful") {
               storeLoginInfo(username, password)
+              this.setState({loading: false})
               this.props.setLoggedIn(response.id)
           } else {
               this.props.setGlobalError("Something went wrong")
@@ -57,31 +59,31 @@ export class Auth extends React.Component<Props, State> {
   attemptLogin = () => {
     fetchLoginInfo().then(loginInfo => {
       this.submitLoginForm(loginInfo.username, loginInfo.password, true)
-    }, () => {})
+    }, 
+    () => {this.setState({loading: false})}
+    )
   }
 
   componentWillMount = () => {
+    this.setState({loading: true})
     this.attemptLogin()
   }
 
 
   render() {
       return (
-          <View>
-              <View style={styles.container}>
-                <View style={styles.overlay}/>
-                    <Text style={styles.nalpalHeader} >NalPal</Text>
-                    {this.state.register && <Register 
+            <View style={styles.container}>
+                  {this.state.register && <Register 
                           submitRegisterForm={this.submitRegisterForm}
                           loginPage={this.loginPage}
+                          loading={this.state.loading}
                   />}
                   {!this.state.register && <Login 
                   submitLoginForm={this.submitLoginForm}
                   registerPage={this.registerPage}
+                  loading={this.state.loading}
                  />}
               </View>
-          </View>
-
       ) 
   }
 
@@ -97,8 +99,7 @@ export const ErrorText = ({error}) => (
 
 export const styles = StyleSheet.create({
   container: {
-    position: 'relative',
-    height: "100%",
+    flex: 1
   },
   overlay: {
     position: "absolute",

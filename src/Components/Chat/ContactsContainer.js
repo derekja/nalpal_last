@@ -5,8 +5,9 @@ import {AddButton} from "../UI/Buttons/AddButton"
 import {ModalComponent} from "../UI/Modal"
 import {ModalButton} from "../UI/Buttons/ModalButton"
 import {CloseButton} from "../UI/Buttons/CloseButton"
+import withLoadingScreen from "../UI/Loading"
 
-export class ContactsContainer extends React.Component<Props, State> {
+class ContactsContainer extends React.Component<Props, State> {
   
   constructor(props) {
     super(props);
@@ -82,3 +83,5 @@ const styles = StyleSheet.create({
     margin: 20
   }
 });
+
+export default withLoadingScreen(ContactsContainer);

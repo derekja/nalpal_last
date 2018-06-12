@@ -5,6 +5,7 @@ import {WideButton} from "../UI/Buttons/WideButton"
 import {styles, ErrorText} from "./Auth"
 import assign from "lodash/assign"
 import {validateForm} from "../../Helpers/formValidation"
+import withLoadingScreen from "../UI/Loading"
 
 export class Register extends React.Component<Props, State> {
 
@@ -53,47 +54,54 @@ export class Register extends React.Component<Props, State> {
 
   render() { 
     return (
-      <View style={styles.formContainer}>
-            <TextFieldComponent
-              id="username"
-              placeholder="Username"
-              value={this.state.username.value}
-              onChange={this.onTextFieldChange}
-            />
-            {this.state.username.error && <ErrorText error={this.state.username.error}/>}
-            <TextFieldComponent
-              id="password"
-              placeholder="Password"
-              value={this.state.password.value}
-              onChange={this.onTextFieldChange}
-              password={true}
-            />
-            {this.state.password.error && <ErrorText error={this.state.password.error}/>}
-            <TextFieldComponent
-              id="email"
-              placeholder="Email"
-              value={this.state.email.value}
-              onChange={this.onTextFieldChange}
-            />
-            {this.state.email.error && <ErrorText error={this.state.email.error}/>}
-            <TextFieldComponent
-              id="mobile"
-              placeholder="Mobile"
-              value={this.state.mobile.value}
-              onChange={this.onTextFieldChange}
-            />
-            {this.state.mobile.error && <ErrorText error={this.state.mobile.error}/>}
-            <WideButton
-              title="Register"
-              buttonStyleType = "secondary"
-              onPress={this.submitRegisterForm}
-            />
-            <TouchableHighlight onPress={this.props.loginPage}>
-              <Text
-              >
-                Login
-              </Text>
-            </TouchableHighlight>
-      </View>);
+      <View style={styles.container}>
+          <View style={styles.overlay}/>
+          <Text style={styles.nalpalHeader} >NalPal</Text>
+          <View style={styles.formContainer}>
+                <TextFieldComponent
+                  id="username"
+                  placeholder="Username"
+                  value={this.state.username.value}
+                  onChange={this.onTextFieldChange}
+                />
+                {this.state.username.error && <ErrorText error={this.state.username.error}/>}
+                <TextFieldComponent
+                  id="password"
+                  placeholder="Password"
+                  value={this.state.password.value}
+                  onChange={this.onTextFieldChange}
+                  password={true}
+                />
+                {this.state.password.error && <ErrorText error={this.state.password.error}/>}
+                <TextFieldComponent
+                  id="email"
+                  placeholder="Email"
+                  value={this.state.email.value}
+                  onChange={this.onTextFieldChange}
+                />
+                {this.state.email.error && <ErrorText error={this.state.email.error}/>}
+                <TextFieldComponent
+                  id="mobile"
+                  placeholder="Mobile"
+                  value={this.state.mobile.value}
+                  onChange={this.onTextFieldChange}
+                />
+                {this.state.mobile.error && <ErrorText error={this.state.mobile.error}/>}
+                <WideButton
+                  title="Register"
+                  buttonStyleType = "secondary"
+                  onPress={this.submitRegisterForm}
+                />
+                <TouchableHighlight onPress={this.props.loginPage}>
+                  <Text
+                  >
+                    Login
+                  </Text>
+                </TouchableHighlight>
+          </View>
+    </View>
+          );
   }
 }
+
+export default withLoadingScreen(Register);
