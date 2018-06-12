@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import MapContainer from '../UI/MapContainer'
 import {EmergencyMessageBox} from './EmergencyMessageBox'
 import {styles} from "./Emergency"
-import {ActionButton} from "../UI/Buttons/ActionButton"
+import {ActionButton, buttonContainerStyles} from "../UI/Buttons/ActionButton"
 import {Header} from "../Navigation/Header"
 import {AddressBar} from "./AddressBar"
 
@@ -33,7 +33,7 @@ export class EmergencyResponse extends React.Component<Props, State> {
               <MapContainer requestLocation={this.props.responder.requestLocation} />
           </View>
           <EmergencyMessageBox messages={messages}/>
-          <View style={styles.buttonContainer}>
+          <View style={buttonContainerStyles.buttonContainer}>
                 <ActionButton type={"dark"} single={true} title="Cancel the Response" onPress={this.cancelResponse}/>
           </View>
         </View>

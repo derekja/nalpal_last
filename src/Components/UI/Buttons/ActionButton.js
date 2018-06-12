@@ -62,3 +62,11 @@ const styles = StyleSheet.create({
     color: colours.primary
   }
 });
+
+export const buttonContainerStyles = StyleSheet.create({
+
+  buttonContainer: {
+    flexDirection: "row",
+    height: 55,
+  }
+})

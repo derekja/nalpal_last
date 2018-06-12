@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import MapContainer from '../UI/MapContainer'
 import {ConfirmationMessageBox} from "./ConfirmationMessageBox"
-import {ActionButton} from "../UI/Buttons/ActionButton"
+import {ActionButton, buttonContainerStyles} from "../UI/Buttons/ActionButton"
 import assign from "lodash/assign"
 import {styles} from "./Emergency"
 import {Header} from "../Navigation/Header"
@@ -37,7 +37,7 @@ export class EmergencyResponseConfirmation extends React.Component {
             <MapContainer requestLocation={this.props.responder.requestLocation} userLocation={this.props.userLocation}/>
             <ConfirmationMessageBox  message={message}/>
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={buttonContainerStyles.buttonContainer}>
               <ActionButton type={"light"} title="Dismiss for Now" onPress={this.declineRequest}/>
               <ActionButton type={"emergency"} title = "Respond to Emergency" onPress={this.acceptRequestToRespond}/>
         </View>

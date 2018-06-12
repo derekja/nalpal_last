@@ -12,7 +12,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
       id: null,
       welcome: false,
       globalError: null

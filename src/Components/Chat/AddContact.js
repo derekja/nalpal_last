@@ -1,8 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet} from 'react-native'
 import {TextFieldComponent} from "../UI/TextFieldComponent"
-import {CancelButton} from "../UI/Buttons/CancelButton"
-import {WideButton} from "../UI/Buttons/WideButton"
+import {ActionButton, buttonContainerStyles} from "../UI/Buttons/ActionButton"
 
 export class AddContact extends React.Component<Props, State> {
   
@@ -23,11 +22,7 @@ export class AddContact extends React.Component<Props, State> {
 
   render() {
     return (
-      <View>
-        <CancelButton
-          title="Back"
-          onPress={this.props.closeActionScreen}
-          />
+      <View style={{flex: 1}}>
 
         {!this.props.contactState.addContactSuccess && <View style={styles.addContactContainer}>
           <TextFieldComponent
@@ -36,14 +31,16 @@ export class AddContact extends React.Component<Props, State> {
             value={this.state.contactUsername}
             onChange={this.onTextFieldChange}
           />
-          <WideButton
-            title="Send Contact Request"
-            buttonStyleType = "secondary"
-            onPress={this.sendContactRequest}
-          /> 
         </View>}
         {this.props.contactState.addContactSuccess && <View style={styles.addContactContainer}>
           <Text> Friend request sent</Text>
+        </View>}
+        {!this.props.contactState.addContactSuccess && <View style={buttonContainerStyles.buttonContainer}>
+              <ActionButton type={"light"} title="Cancel" onPress={this.props.closeActionScreen}/>
+              <ActionButton type={"dark"} title = "Add" onPress={this.sendContactRequest}/>
+        </View>}
+        {this.props.contactState.addContactSuccess && <View style={buttonContainerStyles.buttonContainer}>
+              <ActionButton single={true} type={"light"} title="Back" onPress={this.props.closeActionScreen}/>
         </View>}
       </View>
     );
@@ -53,6 +50,7 @@ export class AddContact extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   addContactContainer: {
     flex: 1,
-     alignItems: "center"
+     alignItems: "center",
+     justifyContent: "center"
   }
 });
