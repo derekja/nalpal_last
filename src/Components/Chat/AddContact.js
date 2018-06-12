@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet} from 'react-native'
 import {TextFieldComponent} from "../UI/TextFieldComponent"
-import {CancelButton} from "../UI/CancelButton"
-import {WideButton} from "../UI/WideButton"
+import {CancelButton} from "../UI/Buttons/CancelButton"
+import {WideButton} from "../UI/Buttons/WideButton"
 
 export class AddContact extends React.Component<Props, State> {
   

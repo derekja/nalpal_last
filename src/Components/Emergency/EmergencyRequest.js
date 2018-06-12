@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import MapContainer from "../UI/MapContainer"
-import {EmergencyRequestButton} from "./EmergencyRequestButton"
+import {ActionButton} from "../UI/Buttons/ActionButton"
 import {Header} from "../Navigation/Header"
 import {AddressBar} from "./AddressBar"
 import {ResponderProximityNotice} from "./ResponderProximityNotice"
@@ -36,7 +36,7 @@ export class EmergencyRequest extends React.Component {
         </View>
         <EmergencyMessageBox messages={messages}/>
         <View style={styles.buttonContainer}>
-              <EmergencyRequestButton single={true} title="Cancel the Call" onPress={this.cancelRequest}/>
+              <ActionButton type={"dark"}single={true} title="Cancel the Call" onPress={this.cancelRequest}/>
         </View>
       </View>
 

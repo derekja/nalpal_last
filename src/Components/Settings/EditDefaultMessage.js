@@ -1,6 +1,6 @@
 import React  from 'react'
 import { View } from 'react-native'
-import {WideButton} from '../UI/WideButton'
+import {WideButton} from '../UI/Buttons/WideButton'
 import {Header} from "../Navigation/Header"
 import {MultiLineTextFieldComponent} from "../UI/MultiLineTextFieldComponent"
 import {storeDefaultMessage, fetchDefaultMessage} from "../../Helpers/storage"

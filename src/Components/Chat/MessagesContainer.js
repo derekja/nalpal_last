@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, ScrollView, StyleSheet} from 'react-native'
 import {Message} from "./ContactMessageCards"
-import {AddButton} from "../UI/AddButton"
+import {AddButton} from "../UI/Buttons/AddButton"
 
 export class MessagesContainer extends React.Component<Props, State> {
   

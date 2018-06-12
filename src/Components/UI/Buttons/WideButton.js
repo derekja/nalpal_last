@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import {colours} from "./colours"
+import {colours} from "../colours"
 
 
 export class WideButton extends React.Component<Props, State> {

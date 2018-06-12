@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, StyleSheet, Text} from "react-native"
-import {CloseButton} from "./CloseButton"
+import {CloseButton} from "./Buttons/CloseButton"
 
 
 export class ErrorBanner extends React.Component<Props, State> {

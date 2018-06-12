@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableHighlight} from 'react-native'
 import {TextFieldComponent} from '../UI/TextFieldComponent'
-import {WideButton} from "../UI/WideButton"
+import {WideButton} from "../UI/Buttons/WideButton"
 import {styles, ErrorText} from "./Auth"
 import assign from "lodash/assign"
 import {validateForm} from "../../Helpers/formValidation"

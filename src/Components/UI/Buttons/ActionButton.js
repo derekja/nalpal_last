@@ -1,8 +1,8 @@
 import React  from 'react'
 import { Text, StyleSheet, TouchableOpacity } from 'react-native'
-import {colours} from "../UI/colours"
+import {colours} from "../colours"
 
-export class EmergencyRequestButton extends React.Component<Props, State> {
+export class ActionButton extends React.Component<Props, State> {
 
 
   render() {
@@ -14,10 +14,10 @@ export class EmergencyRequestButton extends React.Component<Props, State> {
 
       return (
            <TouchableOpacity
-            style={this.props.confirm? [buttonStyle, styles.buttonConfirm] : [buttonStyle, styles.buttonCancel]}
+            style={[buttonStyle, styles[this.props.type + "Button"]]}
             onPress={this.props.onPress}
           >
-              <Text style={this.props.confirm? [styles.text, styles.textConfirm] : [styles.text, styles.textCancel]}>
+              <Text style={[styles.text, styles[this.props.type + "Text"]]}>
               {this.props.title}
               </Text>
             </TouchableOpacity>
@@ -37,16 +37,28 @@ const styles = StyleSheet.create({
   singleButton: {
     flexBasis: "100%"
   },
-  buttonConfirm: {
-    backgroundColor: colours.emergency,
-  },
   text: {
     textAlign: "center",
     color: colours.primary,
     fontWeight: "500",
     fontSize: 18
   },
-  textConfirm: {
-    color: "#ffffff"
+  emergencyButton: {
+    backgroundColor: colours.emergency
   },
+  darkButton: {
+    backgroundColor: colours.primary
+  },
+  lightButton: {
+    backgroundColor: colours.white
+  },
+  emergencyText: {
+    color: colours.white
+  },
+  darkText: {
+    color: colours.white
+  },
+  lightText: {
+    color: colours.primary
+  }
 });

@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, StyleSheet, TouchableHighlight} from "react-native"
-import {AddIcon} from "../Icons/AddIcon"
-import {colours} from './colours'
+import {AddIcon} from "../../Icons/AddIcon"
+import {colours} from '../colours'
 
 
 export class AddButton extends React.Component<Props, State> {

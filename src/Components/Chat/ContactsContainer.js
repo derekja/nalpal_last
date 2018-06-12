@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, ScrollView, StyleSheet, Text} from 'react-native'
 import {Contact} from "./ContactMessageCards"
-import {AddButton} from "../UI/AddButton"
+import {AddButton} from "../UI/Buttons/AddButton"
 import {ModalComponent} from "../UI/Modal"
-import {ModalButton} from "../UI/ModalButton"
-import {CloseButton} from "../UI/CloseButton"
+import {ModalButton} from "../UI/Buttons/ModalButton"
+import {CloseButton} from "../UI/Buttons/CloseButton"
 
 export class ContactsContainer extends React.Component<Props, State> {
   

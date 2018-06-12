@@ -2,7 +2,7 @@ import React from 'react'
 import { View} from 'react-native'
 import MapContainer from "../UI/MapContainer"
 import {ConfirmationMessageBox} from "./ConfirmationMessageBox"
-import {EmergencyRequestButton} from "./EmergencyRequestButton"
+import {ActionButton} from "../UI/Buttons/ActionButton"
 import {fetchDefaultMessage} from "../../Helpers/storage"
 import {styles} from "./Emergency"
 import {AddressBar} from "./AddressBar"
@@ -46,8 +46,8 @@ export class EmergencyRequestConfirmation extends React.Component {
             <ConfirmationMessageBox userMessage={true} message={this.props.defaultMessage}/>
         </View>
         <View style={styles.buttonContainer}>
-              <EmergencyRequestButton title="Cancel" onPress={this.cancelRequest}/>
-              <EmergencyRequestButton confirm={true} title = "Confirm Call for Kit" onPress={this.sendEmergencyRequest}/>
+              <ActionButton title="Cancel" onPress={this.cancelRequest}/>
+              <ActionButton type={"emergency"} title = "Confirm Call for Kit" onPress={this.sendEmergencyRequest}/>
         </View>
       </View>
     );

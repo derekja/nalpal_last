@@ -17,7 +17,7 @@ export class Nav extends React.Component<Props, State> {
     const path = this.getCurrentNavToggle()
     let emergencyNavButton = <NavButton type={"emergency"} title="Emergency" active={path === "emergency"}/>;
     if (this.props.emergencyInProgress && !(path === "emergency")) {
-      emergencyNavButton = <NavButton type={"emergency"} title="Emergency In Progress" emergencyInProgress={this.props.emergencyInProgress} active={this.props.selectedNavToggle === "Emergency"} />
+      emergencyNavButton = <NavButton type={"emergency"} title="Active Emergency" emergencyInProgress={this.props.emergencyInProgress} active={this.props.selectedNavToggle === "Emergency"} />
     }
     return (
         <View

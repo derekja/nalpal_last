@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, StyleSheet, TouchableOpacity} from "react-native"
-import {CloseIcon} from "../Icons/CloseIcon"
+import {CloseIcon} from "../../Icons/CloseIcon"
 
 
 export class CloseButton extends React.Component<Props, State> {
