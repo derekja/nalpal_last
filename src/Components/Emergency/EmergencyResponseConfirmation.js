@@ -21,11 +21,17 @@ export class EmergencyResponseConfirmation extends React.Component {
       this.props.changeState({responder: responder});
   }
 
+  componentWillMount = () => {
+    if(!this.props.responder.address || this.props.responder.address === null) {
+          this.props.fetchAddress("responder")
+      }
+  }
+
   render() {
     const message = "Thank you for helping me, I am in room 253, the code to the building is 8819, my door is unlocked"
     return (
       <View style={styles.container}>
-      <Header headerTitle="Request for Help"/>
+      <Header headerTitle="Request for Help" emergencyInProgress={this.props.emergencyInProgress}/>
         <View style={styles.mapContainer}>
             {this.props.responder.address && <AddressBar address={this.props.responder.address}/>}
             <MapContainer requestLocation={this.props.responder.requestLocation} userLocation={this.props.userLocation}/>

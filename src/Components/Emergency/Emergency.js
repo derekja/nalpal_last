@@ -46,17 +46,21 @@ export class Emergency extends React.Component<Props, State> {
                 requester={this.props.requester}
                 defaultMessage={this.props.defaultMessage}
                 changeState={this.props.changeState}
+                emergencyInProgress={this.props.emergencyInProgress}
                 isVisible={this.props.requester.confirmationPending}/>
       } else {
           page = <EmergencyRequest
                   fetchAddress={this.fetchAddress}
                   requester={this.props.requester}
                   defaultMessage={this.props.defaultMessage}
+                  emergencyInProgress={this.props.emergencyInProgress}
                   changeState={this.props.changeState}/>
       }
     } else if (this.props.responder.requestLocation) {
         if (this.props.responder.requestPending) {
             page = <EmergencyResponseConfirmation
+                  fetchAddress={this.fetchAddress}
+                  emergencyInProgress={this.props.emergencyInProgress}
                   changeState={this.props.changeState}
                   contactName={this.props.responder.contactName}
                   userLocation={this.props.userLocation}
@@ -65,10 +69,12 @@ export class Emergency extends React.Component<Props, State> {
         } else {
           page = <EmergencyResponse 
                     changeState={this.props.changeState}
+                    fetchAddress={this.fetchAddress}
+                    emergencyInProgress={this.props.emergencyInProgress}
                     responder={this.props.responder}/>
         }
     } else {
-      page = <EmergencyMainPage getLocation={this.props.getLocation} changeState= {this.props.changeState} />
+      page = <EmergencyMainPage emergencyInProgress={this.props.emergencyInProgress} getLocation={this.props.getLocation} changeState= {this.props.changeState} />
     }
 
     return (

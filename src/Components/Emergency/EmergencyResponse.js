@@ -13,6 +13,12 @@ export class EmergencyResponse extends React.Component<Props, State> {
       this.props.changeState({responder: {}})
   }
 
+  componentWillMount = () => {
+    if(!this.props.responder.address || this.props.responder.address === null) {
+          this.props.fetchAddress("responder")
+      }
+  }
+
   render() {
     const messages = [
     {text:"(Automated message) Thank you for helping me, I am in room 253, the code to the building is 8819, my door is unlocked", senderId: 1}, 
@@ -21,7 +27,7 @@ export class EmergencyResponse extends React.Component<Props, State> {
 
       return (
         <View style={styles.container}>
-          <Header headerTitle="Responding to Request"/>
+          <Header emergencyInProgress={this.props.emergencyInProgress} headerTitle="Responding to Request"/>
           <View style={styles.mapContainer}>
               {this.props.responder.address && <AddressBar address={this.props.responder.address}/>}
               <MapContainer requestLocation={this.props.responder.requestLocation} />

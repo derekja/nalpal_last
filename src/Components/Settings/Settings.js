@@ -44,7 +44,7 @@ export class Settings extends React.Component<Props, State> {
 	  	} else {
 	  	    return (
 	  	        <View>
-	  	        	<Header headerTitle="Settings"/>
+	  	        	<Header headerTitle="Settings" emergencyInProgress={this.props.emergencyInProgress}/>
 	  		        <WideButton
 	  		          title="Update Kit Status"
 	  		          buttonStyleType = "secondary"

@@ -38,7 +38,7 @@ export async function fetchAddress(location):Promise<any> {
 					const addressComponents = response[0].address_components
 					const formattedAddress = addressComponents[0].short_name + " " + 
 											addressComponents[1].short_name + ", " + 
-											addressComponents[2].short_name + ", " +
+											addressComponents[3].short_name + ", " +
 											addressComponents[5].short_name
 
 

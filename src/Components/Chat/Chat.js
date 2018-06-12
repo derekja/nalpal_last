@@ -112,7 +112,7 @@ export class Chat extends React.Component<Props, State> {
     } else {
       return (
         <View style={styles.chatContainer}>
-        <Header headerTitle="Chat"/>
+        <Header headerTitle="Chat" emergencyInProgress={this.props.emergencyInProgress}/>
           <TabComponent handleTabChange= {this.handleTabChange} selectedTabIndex={this.state.selectedTabIndex} tabs={tabs}/>
           <View style={styles.chatContainer}>
             {this.state.selectedTabIndex === 0 && <ContactsContainer 

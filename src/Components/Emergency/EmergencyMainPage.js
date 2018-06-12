@@ -36,22 +36,22 @@ export class EmergencyMainPage extends React.Component<Props, State> {
 
       return (
         <View>
-        <Header headerTitle="Emergency"/>
-        <WideButton
-          title="Call 911"
-          buttonStyleType = "secondary"
-        />
-        <WideButton
-          title="Send a customized message to friends"
-          buttonStyleType = "secondary"
-          onPress={this.openContactConfirmationScreen}
-        />
-        <WideButton
-          title="Emergency! Get me a Kit!"
-          buttonStyleType = "main"
-          onPress={this.openGlobalConfirmationScreen}
-        />
-      </View>
+          <Header emergencyInProgress={this.props.emergencyInProgress} headerTitle="Emergency"/>
+          <WideButton
+            title="Call 911"
+            buttonStyleType = "secondary"
+          />
+          <WideButton
+            title="Send a customized message to friends"
+            buttonStyleType = "secondary"
+            onPress={this.openContactConfirmationScreen}
+          />
+          <WideButton
+            title="Emergency! Get me a Kit!"
+            buttonStyleType = "main"
+            onPress={this.openGlobalConfirmationScreen}
+          />
+        </View>
     );
   }
 

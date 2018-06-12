@@ -53,7 +53,7 @@ export async function fetchAddress(location){
     const addressComponents = responseJson.results[0].address_components
     const formattedAddress = addressComponents[0].short_name + " " + 
 							addressComponents[1].short_name + ", " + 
-							addressComponents[2].short_name + ", " +
+							addressComponents[3].short_name + ", " +
 							addressComponents[5].short_name
 	return(formattedAddress)
   } catch (error) {

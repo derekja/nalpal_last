@@ -12,7 +12,7 @@ export class Information extends React.Component<Props, State> {
   render() { 
     return (
         <View>
-        	<Header headerTitle="Information"/>
+        	<Header headerTitle="Information" emergencyInProgress={this.props.emergencyInProgress}/>
 	        <WideButton
 	          title="Watch the Tutorial"
 	          buttonStyleType = "secondary"

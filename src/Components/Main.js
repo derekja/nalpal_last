@@ -77,6 +77,7 @@ export class Main extends React.Component<Props, State> {
               >
                   <View style={styles.contentContainer}>
                     <MainRouting
+                        emergencyInProgress={emergencyInProgress}
                         requester={this.state.requester}
                         responder={this.state.responder}
                         changeState = {this.changeState}
@@ -101,12 +102,13 @@ export class Main extends React.Component<Props, State> {
 const MainRouting = (props) => (
   <View style={styles.contentContainer}>
     <Route path="/chat" render={() => (<Chat  
+                  emergencyInProgress={props.emergencyInProgress}
                   id={props.id} contacts={props.contacts} 
                   pendingContacts={props.pendingContacts} 
                   setGlobalError={props.setGlobalError}
                   changeState={props.changeState}/>)}/>
-    <Route path="/information" component={Information} />
-    <Route path="/settings" render={() => (<Settings defaultMessage={props.defaultMessage} logOut={props.logOut} changeState={props.changeState}/>)} />
+    <Route path="/information" render={() => (<Information  emergencyInProgress={props.emergencyInProgress} />)} />
+    <Route path="/settings" render={() => (<Settings emergencyInProgress={props.emergencyInProgress} defaultMessage={props.defaultMessage} logOut={props.logOut} changeState={props.changeState}/>)} />
     <Route path="/emergency" render={() => (<Emergency  {...props} />)}/>
   </View>
 );

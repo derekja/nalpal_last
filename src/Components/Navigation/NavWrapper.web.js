@@ -22,7 +22,7 @@ export class NavWrapper extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
   contentContainerWithNav: {
-    marginBottom: 40,
+    marginBottom: 60,
     flex: 1
   },
   contentContainerNoNav: {

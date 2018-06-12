@@ -39,7 +39,7 @@ export class EmergencyRequestConfirmation extends React.Component {
     const defaultMessage = "Thank you for helping me, I am in room 253, the code to the building is 8819, my door is unlocked"
     return (
       <View style={styles.container}>
-        <Header headerTitle="Confirm Call for a Kit"/>
+        <Header headerTitle="Confirm Call for a Kit" emergencyInProgress={this.props.emergencyInProgress}/>
         <View style={styles.mapContainer}>
             {this.props.requester.address && <AddressBar address={this.props.requester.address}/>}
             <MapContainer requestLocation={this.props.requester.requestLocation} />

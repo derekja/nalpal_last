@@ -28,7 +28,7 @@ export class EmergencyRequest extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Header headerTitle="Request for Help Sent"/>
+        <Header headerTitle="Request for Help Sent" emergencyInProgress={this.props.emergencyInProgress}/>
         <View style={styles.mapContainer}>
             {this.props.requester.address && <AddressBar address={this.props.requester.address}/>}
             <MapContainer requestLocation={this.props.requester.requestLocation} />
