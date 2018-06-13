@@ -29,7 +29,11 @@ export class Settings extends React.Component<Props, State> {
 		      longitude: -123.368962
 		    }
 		}
-		this.props.changeState({responder: responder})
+		const userLocation = {
+			latitude: 48.429200,
+		    longitude: -123.362755
+		}
+		this.props.changeState({responder: responder, userLocation: userLocation})
 	}
 
   	render() { 

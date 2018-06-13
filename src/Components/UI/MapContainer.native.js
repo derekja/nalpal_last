@@ -18,8 +18,8 @@ import MapView from 'react-native-maps';
         initialRegion={{
           latitude: this.props.requestLocation.latitude,
           longitude: this.props.requestLocation.longitude,
-          latitudeDelta: 0.0422,
-          longitudeDelta: 0.0321,
+          latitudeDelta: 0.0272,
+          longitudeDelta: 0.0271,
         }}
       >
         {this.props.userLocation && <MapView.Marker

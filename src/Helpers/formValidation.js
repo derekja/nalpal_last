@@ -6,10 +6,10 @@ export function validateForm(fields: Array) {
 		let error = null
 		if (hasRequirement(field.validations, "required")) {
 			error = checkRequiredError(field.value)
-		} 
+		}
 		if (!error && hasRequirement(field.validations, "email")){
 			error = checkEmailError(field.value)
-		} 
+		}
 		if (!error && hasRequirement(field.validations, "phonenumber")) {
 			error = checkPhoneNumberError(field.value)
 		}

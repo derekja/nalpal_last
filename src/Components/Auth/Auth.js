@@ -17,19 +17,23 @@ export class Auth extends React.Component<Props, State> {
   }
 
   submitRegisterForm = (username, password, email, mobile) => {
+    this.setState({loading: true})
     postRegisterUser(username, email, mobile, password).then(
         (response) => {
           storeLoginInfo(username, password)
           this.props.setWelcomeState(true)
           this.props.setLoggedIn(response.id)
+          this.setState({loading: false})
         },
         (error) => {
             this.props.setGlobalError(error.message)
+            this.setState({loading: false})
         }
       )
   }
 
   submitLoginForm = (username, password, autoAttempt = false) => {
+    this.setState({loading: true})
     postLogin(username, password).then(
         (response) => {
           if (response.status === "Login Successful") {
@@ -38,12 +42,14 @@ export class Auth extends React.Component<Props, State> {
               this.props.setLoggedIn(response.id)
           } else {
               this.props.setGlobalError("Something went wrong")
+              this.setState({loading: false})
           }
         },
         (error) => {
           if (!autoAttempt) {
             this.props.setGlobalError(error.message)
           }
+          this.setState({loading: false})
         }
       )
   }

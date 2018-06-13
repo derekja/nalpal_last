@@ -88,6 +88,7 @@ export class Main extends React.Component<Props, State> {
                         getLocation={this.getLocation}
                         defaultMessage={this.state.defaultMessage}
                         setGlobalError={this.props.setGlobalError}
+                        userLocation={this.state.userLocation}
                     />
                   </View>
             </NavWrapper>

@@ -68,6 +68,7 @@ export class Emergency extends React.Component<Props, State> {
                   isVisible={this.props.responder.requestPending}/>
         } else {
           page = <EmergencyResponse 
+                    userLocation={this.props.userLocation}
                     changeState={this.props.changeState}
                     fetchAddress={this.fetchAddress}
                     emergencyInProgress={this.props.emergencyInProgress}
@@ -92,10 +93,6 @@ export const styles = StyleSheet.create({
   },
   mapContainer: {
     flex: 1,
-  }, 
-  buttonContainer: {
-    flexDirection: "row",
-    height: 55,
   }
 
 });
