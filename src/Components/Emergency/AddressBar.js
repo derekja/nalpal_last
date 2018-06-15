@@ -31,8 +31,6 @@ export class AddressBar extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     addressBarContainer: {
       width: '100%',
-      position: "absolute",
-      top: 0,
       zIndex: 100,
       backgroundColor: "#ffffff"
     },

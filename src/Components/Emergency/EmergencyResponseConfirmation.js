@@ -32,8 +32,8 @@ export class EmergencyResponseConfirmation extends React.Component {
     return (
       <View style={styles.container}>
       <Header headerTitle="Request for Help" emergencyInProgress={this.props.emergencyInProgress}/>
+        {this.props.responder.address && <AddressBar address={this.props.responder.address}/>}
         <View style={styles.mapContainer}>
-            {this.props.responder.address && <AddressBar address={this.props.responder.address}/>}
             <MapContainer requestLocation={this.props.responder.requestLocation} userLocation={this.props.userLocation}/>
             <ConfirmationMessageBox  message={message}/>
         </View>

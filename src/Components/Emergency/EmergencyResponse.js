@@ -28,8 +28,8 @@ export class EmergencyResponse extends React.Component<Props, State> {
       return (
         <View style={styles.container}>
           <Header emergencyInProgress={this.props.emergencyInProgress} headerTitle="Responding to Request"/>
+          {this.props.responder.address && <AddressBar address={this.props.responder.address}/>}
           <View style={styles.mapContainer}>
-              {this.props.responder.address && <AddressBar address={this.props.responder.address}/>}
               <MapContainer userLocation={this.props.userLocation} requestLocation={this.props.responder.requestLocation} />
           </View>
           <EmergencyMessageBox messages={messages}/>
