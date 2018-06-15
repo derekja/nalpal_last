@@ -41,15 +41,15 @@ export class Auth extends React.Component<Props, State> {
               this.setState({loading: false})
               this.props.setLoggedIn(response.id)
           } else {
-              this.props.setGlobalError("Something went wrong")
               this.setState({loading: false})
+              this.props.setGlobalError("Something went wrong")
           }
         },
         (error) => {
+          this.setState({loading: false})
           if (!autoAttempt) {
             this.props.setGlobalError(error.message)
           }
-          this.setState({loading: false})
         }
       )
   }

@@ -44,11 +44,11 @@ export default class App extends Component {
   render() { 
     return (
       <ThemeWrapper>
-          <Router>
-            <Switch>
-                {this.state.globalError && <ErrorBanner 
+        {this.state.globalError && <ErrorBanner 
                         errorText={this.state.globalError} 
                         setGlobalError={this.setGlobalError}/>}
+          <Router>
+            <Switch>
                 <Route exact path="/" render={() => (<Redirect to="/emergency"/>)}/>
                 <Route path="/auth"  render={ (props) => (
                           this.state.loggedIn ? (

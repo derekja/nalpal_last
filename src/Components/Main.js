@@ -65,7 +65,7 @@ export class Main extends React.Component<Props, State> {
 
     if (this.props.welcome) {
         return (<View style={styles.contentContainer}>
-            <Welcome setWelcomeState={this.props.setWelcomeState}/>
+            <Welcome setWelcomeState={this.props.setWelcomeState} changeState={this.changeState}/>
         </View>)
 
     }else {
