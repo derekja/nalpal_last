@@ -1,37 +1,60 @@
 import React from 'react'
 import {View, StyleSheet} from "react-native"
-import {EmergencyRequest} from './EmergencyRequest'
+import EmergencyRequest from './EmergencyRequest'
 import {EmergencyResponse} from './EmergencyResponse'
 import {EmergencyResponseConfirmation} from './EmergencyResponseConfirmation'
-import {EmergencyRequestConfirmation} from './EmergencyRequestConfirmation'
+import EmergencyRequestConfirmation from './EmergencyRequestConfirmation'
 import {EmergencyMainPage} from "./EmergencyMainPage"
 import {fetchAddress} from "../../Helpers/googleMapsApi"
-import assign from "lodash/assign"
+import cloneDeep from "lodash/cloneDeep"
+import {getCurrentLocation} from "../../Helpers/location"
 
 
 export class Emergency extends React.Component<Props, State> {
 
   constructor(props) {
-    super()
+    super(props);
+    this.state = {
+      loadingLocation: false
+    }
   }
 
   fetchAddress = (requestType) => {
+    console.log("fetching address")
     if (requestType !== "requester" && requestType !== "responder") {
       return null
     }
-    let requestObject = this.props[requestType]
+    let requestObject = cloneDeep(this.props[requestType])
     if (requestObject.requestLocation) {
       fetchAddress(requestObject.requestLocation).then(
           (address) => {
-            assign(requestObject, {address: address})
+            requestObject.address = address
             this.props.changeState({[requestType]: requestObject})
           },
           (error) => {
-            assign(requestObject, {address: "address unavailable"})
+            requestObject.address = "address unavailable"
             this.props.changeState({[requestType]: requestObject})
           }
         )
     }
+  }
+
+  getRequestLocation = () => {
+    this.setState({loadingLocation: true})
+    getCurrentLocation(
+      (position) => {
+        console.log(position)
+          let requester = cloneDeep(this.props.requester)
+          requester.requestLocation = position
+          this.props.changeState({requester: requester})
+          this.fetchAddress("requester")
+          this.setState({loadingLocation: false})
+      }, 
+      () => {
+        this.setState({loadingLocation: false})
+        this.props.setGlobalError("Could not get Location")
+      }
+    )
   }
 
 
@@ -46,12 +69,16 @@ export class Emergency extends React.Component<Props, State> {
                 requester={this.props.requester}
                 defaultMessage={this.props.defaultMessage}
                 changeState={this.props.changeState}
+                getRequestLocation={this.getRequestLocation}
+                loading={this.state.loadingLocation}
                 emergencyInProgress={this.props.emergencyInProgress}
                 isVisible={this.props.requester.confirmationPending}/>
       } else {
           page = <EmergencyRequest
                   fetchAddress={this.fetchAddress}
                   requester={this.props.requester}
+                  getRequestLocation={this.getRequestLocation}
+                  loading={this.state.loadingLocation}
                   defaultMessage={this.props.defaultMessage}
                   emergencyInProgress={this.props.emergencyInProgress}
                   changeState={this.props.changeState}/>
@@ -75,7 +102,7 @@ export class Emergency extends React.Component<Props, State> {
                     responder={this.props.responder}/>
         }
     } else {
-      page = <EmergencyMainPage emergencyInProgress={this.props.emergencyInProgress} getLocation={this.props.getLocation} changeState= {this.props.changeState} />
+      page = <EmergencyMainPage emergencyInProgress={this.props.emergencyInProgress} changeState= {this.props.changeState} />
     }
 
     return (

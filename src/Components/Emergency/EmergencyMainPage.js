@@ -7,27 +7,23 @@ export class EmergencyMainPage extends React.Component<Props, State> {
 
 
   openGlobalConfirmationScreen = () => {
-      this.props.getLocation((position) => {
-          const requester = { 
-            requestType: "GLOBAL_REQUEST",
-            confirmationPending: true,
-            requestLocation: position,
-            address: null
-          };
-          this.props.changeState({requester: requester})
-      })
+      const requester = { 
+        requestType: "GLOBAL_REQUEST",
+        confirmationPending: true,
+        requestLocation: {},
+        address: null
+      };
+      this.props.changeState({requester: requester})
   }
   
   openContactConfirmationScreen = () => {
-      this.props.getLocation((position) => {
-          const requester = { 
-            requestType: "CONTACT_REQUEST",
-            confirmationPending: true,
-            requestLocation: position,
-            address: null
-          };
+      const requester = { 
+        requestType: "CONTACT_REQUEST",
+        confirmationPending: true,
+        requestLocation: {},
+        address: null
+      };
           this.props.changeState({requester: requester})
-      })
   }
 
 

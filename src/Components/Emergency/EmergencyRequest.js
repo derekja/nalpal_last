@@ -7,16 +7,17 @@ import {AddressBar} from "./AddressBar"
 import {ResponderProximityNotice} from "./ResponderProximityNotice"
 import {EmergencyMessageBox} from "./EmergencyMessageBox"
 import {styles} from "./Emergency"
+import withLoadingScreen from "../UI/Loading"
 
-export class EmergencyRequest extends React.Component {
+class EmergencyRequest extends React.Component {
 
   cancelRequest = () => {
       this.props.changeState({requester: {}})
   }
 
   componentWillMount = () => {
-    if(this.props.requester.address === null) {
-          this.props.fetchAddress("requester")
+    if (!this.props.requester.requestLocation.latitude) {
+        this.props.getRequestLocation()
       }
   }
 
@@ -44,3 +45,5 @@ export class EmergencyRequest extends React.Component {
   }
 
 }
+
+export default withLoadingScreen(EmergencyRequest)

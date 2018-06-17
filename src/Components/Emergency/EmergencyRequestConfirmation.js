@@ -8,9 +8,9 @@ import {styles} from "./Emergency"
 import {AddressBar} from "./AddressBar"
 import assign from "lodash/assign"
 import {Header} from "../Navigation/Header"
+import withLoadingScreen from "../UI/Loading"
 
-
-export class EmergencyRequestConfirmation extends React.Component {
+class EmergencyRequestConfirmation extends React.Component {
 
   cancelRequest = () => {
     this.props.changeState({requester: {}})
@@ -23,6 +23,9 @@ export class EmergencyRequestConfirmation extends React.Component {
   }
 
   componentWillMount = () => {
+      if (!this.props.requester.requestLocation.latitude) {
+        this.props.getRequestLocation()
+      }
       if (this.props.defaultMessage == null) {
           fetchDefaultMessage().then(
             (message) => {
@@ -30,13 +33,9 @@ export class EmergencyRequestConfirmation extends React.Component {
             }
           )
       }
-      if(this.props.requester.address === null) {
-          this.props.fetchAddress("requester")
-      }
   }
 
   render() {
-    const defaultMessage = "Thank you for helping me, I am in room 253, the code to the building is 8819, my door is unlocked"
     return (
       <View style={styles.container}>
         <Header headerTitle="Confirm Call for a Kit" emergencyInProgress={this.props.emergencyInProgress}/>
@@ -54,3 +53,5 @@ export class EmergencyRequestConfirmation extends React.Component {
 
   }
 }
+
+export default withLoadingScreen(EmergencyRequestConfirmation)

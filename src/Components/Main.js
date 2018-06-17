@@ -6,7 +6,6 @@ import {Settings} from './Settings/Settings'
 import {Information} from './Information'
 import {NavWrapper} from './Navigation/NavWrapper'
 import { Route} from '../Routing'
-import {getCurrentLocation} from "../Helpers/location"
 import {Welcome} from './Settings/Welcome'
 import has from 'lodash/has'
 
@@ -31,7 +30,6 @@ export class Main extends React.Component<Props, State> {
       },
       contacts: [],
       pendingContacts: []
-
     };
   }
 
@@ -45,14 +43,6 @@ export class Main extends React.Component<Props, State> {
   changeState = (changedStateObjects) => {
       let newState = Object.assign(this.state, changedStateObjects)
       this.setState(newState)
-  }
-
-  getLocation = (onSuccess) => {
-    getCurrentLocation(onSuccess, this.locationFail)
-  }
-
-  locationFail = () => {
-
   }
 
 
